@@ -77,13 +77,13 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-	shell = pkgs.bash;
+	shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.
