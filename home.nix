@@ -14,6 +14,10 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
+  
+  programs.chromium = {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -59,12 +63,12 @@
     vscode
     lutris
     protonplus
-    chromium
     spotify
     bash
     zsh
     copyq
     lshw
+    fastfetch
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
