@@ -19,6 +19,10 @@
     enable = true;
   };
 
+  programs.seahorse = {
+    enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "Domagoj";
