@@ -96,7 +96,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -123,8 +123,8 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "domagoj";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "domagoj";
   
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -139,10 +139,6 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-  };
-
-  hardware = {
-    opengl.enable = true;
   };
 
   xdg.portal.enable = true;
@@ -195,7 +191,7 @@
     rofi-wayland
   ];
 
-  services.xserver.libinput.mouse.accelProfile = "flat";
+  services.libinput.mouse.accelProfile = "flat";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
