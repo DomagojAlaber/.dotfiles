@@ -20,6 +20,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.domagoj = import ./home.nix;
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowUnfreePredicate = (_: true);
           }
         ];
       };
@@ -32,6 +34,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.domagoj = import ./home.nix;
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowUnfreePredicate = (_: true);
           }
         ];
       };
