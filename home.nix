@@ -65,7 +65,6 @@
     libgcc
     sqlite
     gcc
-    notion-app-enhanced
     code-cursor
     libgcc
     tmux
