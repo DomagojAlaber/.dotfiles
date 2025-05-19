@@ -111,7 +111,6 @@
   # VirtualBox
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "domagoj" ];
-  virtualisation.virtualbox.host.enableKvm = true;
 
   # Docker
   virtualisation.docker.enable = true;
