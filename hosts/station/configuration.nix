@@ -109,7 +109,11 @@
   nixpkgs.config.allowUnfree = true;
 
   # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
+    virtualisation.virtualbox.host = {
+    enable               = true;   # install & build vboxdrv
+    enableKVM            = true;   # allow KVM accel
+    addNetworkInterface  = false;  # <-- disable host‐only interface
+  };
   users.extraGroups.vboxusers.members = [ "domagoj" ];
 
   # Docker
