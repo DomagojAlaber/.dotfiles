@@ -111,6 +111,7 @@
   # VirtualBox
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "domagoj" ];
+  virtualisation.virtualbos.host.enableKvm = true;
 
   # Docker
   virtualisation.docker.enable = true;
@@ -139,6 +140,7 @@
     openfortivpn
     notepadqq
     traceroute
+    virtualbox
   ];
 
   services.libinput.mouse.accelProfile = "flat";
