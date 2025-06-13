@@ -53,6 +53,7 @@
   # Enable the GNOME Desktop Environment.
   # Uncomment these two lines if all else fails
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = false;
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -111,7 +112,7 @@
   # VirtualBox
     virtualisation.virtualbox.host = {
     enable               = true;   # install & build vboxdrv
-    enableKVM            = true;   # allow KVM accel
+    enableKvm            = true;   # allow KVM accel
     addNetworkInterface  = false;  # <-- disable host‐only interface
   };
   users.extraGroups.vboxusers.members = [ "domagoj" ];
