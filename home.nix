@@ -43,6 +43,7 @@
     whatsapp-for-linux
     virtualbox
     openfortivpn
+    remmina
     neovim
     thunderbird
     libreoffice
