@@ -42,7 +42,8 @@
     nodejs
     whatsapp-for-linux
     virtualbox
-    openfortivpn
+    ppp
+    sstp
     remmina
     neovim
     thunderbird
