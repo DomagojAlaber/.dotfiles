@@ -29,9 +29,6 @@
     enable = true;
   };
 
-  # Hyprland
-  programs.hyprland.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
 
@@ -101,6 +98,20 @@
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
+
+  #Hyprland 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+	
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Install firefox.
   programs.firefox.enable = true;
