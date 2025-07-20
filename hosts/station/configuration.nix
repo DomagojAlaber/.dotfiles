@@ -66,6 +66,16 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.printing.drivers = with pkgs; [
+    hplip           # open‑source HP driver
+    hplipWithPlugin # includes HP’s proprietary plugin for full feature support
+  ];
+
+  services.avahi = {
+    enable   = true;
+    nssmdns4 = true;  # lets the system resolve *.local via Avahi/Multicast DNS
+  };
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
