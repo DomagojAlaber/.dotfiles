@@ -29,6 +29,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/station/configuration.nix
+          ./modules/hyprland.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
