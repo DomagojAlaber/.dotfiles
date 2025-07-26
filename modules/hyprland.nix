@@ -5,6 +5,7 @@
   programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
+    waybar
     dunst
     libnotify
     swww
