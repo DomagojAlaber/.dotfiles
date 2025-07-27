@@ -140,6 +140,10 @@
   # Docker
   virtualisation.docker.enable = true;
 
+  nix.gc.automatic = true;
+  nix.gc.dates = "weekly";
+  nix.gc.options   = "--delete-older-than 14d";
+  
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
