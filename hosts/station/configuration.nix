@@ -105,7 +105,7 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" ];
 	shell = pkgs.zsh;
   };
 
@@ -125,6 +125,9 @@
 
   # Install Steam
   programs.steam.enable = true;
+
+  # Gamemode
+  programs.gamemode.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
