@@ -41,7 +41,6 @@
     go
     nodejs
     whatsapp-for-linux
-    virtualbox
     neovim
     thunderbird
     libreoffice

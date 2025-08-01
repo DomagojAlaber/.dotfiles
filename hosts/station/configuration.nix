@@ -105,7 +105,7 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "libvirtd"];
 	shell = pkgs.zsh;
   };
 
@@ -129,16 +129,24 @@
   # Gamemode
   programs.gamemode.enable = true;
 
+  # Enable dconf (System Management Tool)
+  programs.dconf.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # VirtualBox
-    virtualisation.virtualbox.host = {
-    enable               = true;   # install & build vboxdrv
-    enableKvm            = true;   # allow KVM accel
-    addNetworkInterface  = false;  # <-- disable host‐only interface
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
   };
-  users.extraGroups.vboxusers.members = [ "domagoj" ];
+  services.spice-vdagentd.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;
@@ -158,7 +166,6 @@
     nodejs
     go
     whatsapp-for-linux
-    virtualbox
     neovim
     kitty
     thunderbird
@@ -171,7 +178,13 @@
     openfortivpn
     notepadqq
     traceroute
-    virtualbox
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
+    adwaita-icon-theme
   ];
 
   services.libinput.mouse.accelProfile = "flat";
