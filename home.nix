@@ -77,6 +77,7 @@
     libsForQt5.qt5ct
     protonup-qt
     air
+    lazygit
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
