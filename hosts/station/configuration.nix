@@ -132,6 +132,9 @@
   # Enable dconf (System Management Tool)
   programs.dconf.enable = true;
 
+  # Hyprland
+  programs.hyprland.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
