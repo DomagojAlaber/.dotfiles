@@ -105,7 +105,7 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "libvirtd"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "libvirtd" "libvirtd"];
 	shell = pkgs.zsh;
   };
 

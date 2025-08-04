@@ -6,6 +6,8 @@
 
   environment.systemPackages = with pkgs; [
     waybar
+    wl-clipboard   # provides wl-paste / wl-copy
+    cliphist       # provides the cliphist CLI
     dunst
     libnotify
     swww
@@ -13,9 +15,4 @@
     rofi-wayland
     networkmanagerapplet
   ]; 
-
-  programs.waybar.enable = true;
-
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 }
