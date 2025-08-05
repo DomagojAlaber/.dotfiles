@@ -138,19 +138,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
-
   virtualisation.virtualbox.host.enable = true;
   # If you want the networking modules too (vboxnetflt, vboxnetadp):
   virtualisation.virtualbox.host.enableExtensionPack = true;
