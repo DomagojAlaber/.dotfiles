@@ -105,7 +105,7 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "libvirtd" "libvirtd"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "vboxusers"];
 	shell = pkgs.zsh;
   };
 
@@ -151,6 +151,11 @@
   };
   services.spice-vdagentd.enable = true;
 
+  virtualisation.virtualbox.host.enable = true;
+  # If you want the networking modules too (vboxnetflt, vboxnetadp):
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.enable = true;
+
   # Docker
   virtualisation.docker.enable = true;
 
@@ -188,6 +193,7 @@
     win-virtio
     win-spice
     adwaita-icon-theme
+    virtio-win
   ];
 
   services.libinput.mouse.accelProfile = "flat";
