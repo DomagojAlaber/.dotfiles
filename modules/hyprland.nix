@@ -14,5 +14,6 @@
     kitty
     rofi-wayland
     networkmanagerapplet
+    hyprshot
   ]; 
 }
