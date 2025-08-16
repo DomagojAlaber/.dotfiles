@@ -3,17 +3,13 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+  # TODO: Please make this file the "master file" 
+  # and move all modules into some folder and pick them up into this one.
+
   home.username = "domagoj";
   home.homeDirectory = "/home/domagoj";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+  home.stateVersion = "24.11"; # DO NOT CHANGE THIS VALUE.
   
   programs.chromium = {
     enable = true;
@@ -122,10 +118,6 @@
     lazygit
     cliphist
     nerd-fonts.jetbrains-mono
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
