@@ -76,27 +76,14 @@
     nssmdns4 = true;  # lets the system resolve *.local via Avahi/Multicast DNS
   };
 
-  # Enable sound with pipewire.
-  # services.pulseaudio.enable = false;
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   # If you want to use JACK applications, uncomment this
-  #   #jack.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
-  #   # use the example session manager (no others are packaged yet so this is enabled by default,
-  #   # no need to redefine it in your config for now)
-  #   #media-session.enable = true;
-  # };
-
-  services.pipewire.enable = lib.mkForce false;
   services.gnome.gnome-remote-desktop.enable = false;
-
-  services.pulseaudio.enable = true;
-  services.pulseaudio.support32Bit = true;  # if you need 32-bit sound
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -119,7 +106,7 @@
   systemd.services."autovt@tty1".enable = false;
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland];
 
   # Install firefox.
   programs.firefox.enable = true;
