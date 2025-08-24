@@ -118,6 +118,7 @@
     lazygit
     cliphist
     nerd-fonts.jetbrains-mono
+    wlsunset
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
