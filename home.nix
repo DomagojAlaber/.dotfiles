@@ -86,7 +86,7 @@
     pgadmin4
     dbeaver-bin
     bun
-    notepadqq
+    notepad-next
     traceroute
     blender
     vscode

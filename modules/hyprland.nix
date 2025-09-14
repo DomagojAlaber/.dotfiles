@@ -12,7 +12,7 @@
     libnotify
     swww
     kitty
-    rofi-wayland
+    rofi
     networkmanagerapplet
     hyprshot
   ]; 

@@ -158,8 +158,6 @@
     dbeaver-bin
     python312Packages.fastapi
     bun
-    openfortivpn
-    notepadqq
     traceroute
     virt-manager
     virt-viewer

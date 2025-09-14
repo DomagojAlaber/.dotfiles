@@ -182,8 +182,6 @@
     dbeaver-bin
     python312Packages.fastapi
     bun
-    openfortivpn
-    notepadqq
     traceroute
     waybar
     eww
