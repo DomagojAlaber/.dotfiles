@@ -188,7 +188,7 @@
     dunst
     swww
     kitty
-    rofi-wayland
+    rofi
   ];
 
   services.libinput.mouse.accelProfile = "flat";
