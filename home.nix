@@ -122,6 +122,8 @@
     davinci-resolve
     mixxx
     obsidian
+    pamixer
+    pavucontrol
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
