@@ -125,6 +125,8 @@
     pamixer
     pavucontrol
     nettools
+    nicotine-plus
+    brave
   ];
 
 
