@@ -120,7 +120,6 @@
     nerd-fonts.jetbrains-mono
     wlsunset
     davinci-resolve
-    mixxx
     obsidian
     pamixer
     pavucontrol

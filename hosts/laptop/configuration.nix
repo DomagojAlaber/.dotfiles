@@ -189,6 +189,7 @@
     swww
     kitty
     rofi
+    mixxx
   ];
 
   services.libinput.mouse.accelProfile = "flat";
