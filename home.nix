@@ -126,6 +126,7 @@
     nettools
     nicotine-plus
     brave
+    ngrok
   ];
 
 
