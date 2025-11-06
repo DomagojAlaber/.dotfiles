@@ -104,13 +104,11 @@
     libgcc
     tmux
     drawio
-    prismlauncher-unwrapped
     jdk
     sweethome3d.application
     postman
     uv
     dxvk
-    krusader
     adwaita-qt
     libsForQt5.qt5ct
     protonup-qt
