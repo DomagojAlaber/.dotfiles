@@ -125,7 +125,6 @@
     nicotine-plus
     brave
     ngrok
-    dart
     flutter
   ];
 
