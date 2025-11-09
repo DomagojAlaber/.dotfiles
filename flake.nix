@@ -13,9 +13,9 @@
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/laptop/configuration.nix
-          ./modules/hyprland.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -28,9 +28,9 @@
       };
       station = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/station/configuration.nix
-          ./modules/hyprland.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

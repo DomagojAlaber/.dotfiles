@@ -2,9 +2,12 @@
 
 {
   # Hyprland 
-  programs.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     waybar
     wl-clipboard   # provides wl-paste / wl-copy
     cliphist       # provides the cliphist CLI

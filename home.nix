@@ -1,6 +1,21 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
+let
+  # importAllNix: path -> [ path ]
+  # Returns a list of all .nix files in the given directory (non-recursive).
+  importAllNix = dir:
+    let
+      files = builtins.readDir dir;
+      # keep only regular files that end with ".nix"
+      nixFiles = lib.filterAttrs (name: type:
+        type == "regular" && lib.hasSuffix ".nix" name
+      ) files;
+    in
+      map (name: dir + "/${name}") (builtins.attrNames nixFiles);
+in
 {
+  # This will import every .nix file from ./modules
+  imports = importAllNix ./modules;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   # TODO: Please make this file the "master file" 
