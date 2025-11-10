@@ -30,14 +30,14 @@ in
     enable = true;
   };
 
-  programs.git = {
-    enable = true;
-    userName = "Domagoj";
-    userEmail = "a.domagoj@hotmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-    };
-  };
+  # programs.git = {
+  #   enable = true;
+  #   userName = "Domagoj";
+  #   userEmail = "a.domagoj@hotmail.com";
+  #   extraConfig = {
+  #     init.defaultBranch = "main";
+  #   };
+  # };
 
   programs.yazi = {
     enable = true;
