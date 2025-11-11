@@ -26,8 +26,8 @@
       ### ENVIRONMENT VARIABLES ###
       #############################
       env = [
-        "XCURSOR_SIZE,12"
-        "HYPRCURSOR_SIZE,12"
+        "XCURSOR_SIZE,10"
+        "HYPRCURSOR_SIZE,10"
       ];
 
       #####################
@@ -38,8 +38,8 @@
         gaps_out = 10;
         border_size = 2;
 
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" = "rgba(9932ccff)";
+        "col.inactive_border" = "rgba(cba6f7cc)";
 
         resize_on_border = false;
         allow_tearing = false;

@@ -6,9 +6,8 @@
 
     style = ''
       * {
-          /* `otf-font-awesome` and SpaceMono Nerd Font are required to be installed for icons */
           font-family: "SpaceMono Nerd Font";
-          font-size: 15px;
+          font-size: 12px;
       }
 
       window#waybar {
