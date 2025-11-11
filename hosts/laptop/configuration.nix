@@ -170,7 +170,6 @@
     git
     nodejs
     go
-    whatsapp-for-linux
     virtualbox
     neovim
     kitty
