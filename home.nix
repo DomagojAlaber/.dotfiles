@@ -93,7 +93,7 @@ in
     git
     go
     nodejs
-    whatsapp-for-linux
+    zapzap
     neovim
     thunderbird
     libreoffice

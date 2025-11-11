@@ -148,7 +148,6 @@
     git
     nodejs
     go
-    whatsapp-for-linux
     neovim
     kitty
     thunderbird
