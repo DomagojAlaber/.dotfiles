@@ -398,7 +398,6 @@
     rofi
     hyprshot
 
-    # font-family: "SpaceMono Nerd Font";
-    (pkgs.nerdfonts.override { fonts = [ "SpaceMono" ]; })
+    nerd-fonts.space-mono
   ];
 }
