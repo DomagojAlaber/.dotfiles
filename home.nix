@@ -30,6 +30,13 @@ in
     enable = true;
   };
 
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -52,17 +59,13 @@ in
     bun
     notepad-next
     traceroute
-    blender
     vscode
-    lutris
-    protonplus
     spotify
     bash
     zsh
     lshw
     fastfetch
     seahorse
-    libgcc
     sqlite
     gcc
     libgcc

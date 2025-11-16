@@ -119,8 +119,8 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-	shell = pkgs.zsh;
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+	  shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.
@@ -154,12 +154,24 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
-
   # Docker
   virtualisation.docker.enable = true;
 
+  # Virtualisaton attempt
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["domagoj"];
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      swtpm.enable = true;
+    };
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
+  services.spice-vdagentd.enable = true;  
+
+  # Enable dconf (System Management Tool)
+  programs.dconf.enable = true;
+  
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -170,7 +182,6 @@
     git
     nodejs
     go
-    virtualbox
     neovim
     kitty
     thunderbird
@@ -188,6 +199,7 @@
     kitty
     rofi
     mixxx
+    swtpm
   ];
 
   services.libinput.mouse.accelProfile = "flat";
