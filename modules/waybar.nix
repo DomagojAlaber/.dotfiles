@@ -392,7 +392,6 @@
     networkmanagerapplet
     swww
     wlsunset
-    yazi
     kitty
     rofi
     hyprshot

@@ -198,7 +198,6 @@
     networkmanagerapplet
     hyprshot
     wlsunset
-    yazi
   ];
 
   ##########################
