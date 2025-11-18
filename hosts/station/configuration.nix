@@ -93,7 +93,7 @@
     isNormalUser = true;
     description = "DomagojAlaber";
     extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "vboxusers"];
-	shell = pkgs.zsh;
+	  shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.

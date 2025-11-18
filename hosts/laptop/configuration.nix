@@ -171,6 +171,8 @@
 
   # Enable dconf (System Management Tool)
   programs.dconf.enable = true;
+
+  environment.pathsToLink = [ "/share/zsh" ];
   
   #List packages installed in system profile. To search, run:
   # $ nix search wget
