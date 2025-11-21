@@ -11,7 +11,12 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 8;
+    editor = false;
+  };
+  boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "laptop"; # Define your hostname.
@@ -82,9 +87,15 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  # Uncomment these two lines if all else fails
+  services.displayManager = {
+    gdm.enable = true;
+    autoLogin = {
+      enable = true;
+      user = "domagoj";
+    };
+    defaultSession = "hyprland";
+  };
   services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = true;
 
   services.blueman.enable = true;
   # Configure keymap in X11
@@ -123,10 +134,6 @@
 	  shell = pkgs.zsh;
   };
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "domagoj";
-  
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
