@@ -94,7 +94,6 @@ in
     flutter
     claude-code
     codex
-    rpi-imager
   ];
 
 
