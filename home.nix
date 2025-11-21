@@ -94,6 +94,7 @@ in
     ngrok
     flutter
     claude-code
+    codex
   ];
 
 
