@@ -35,6 +35,13 @@ in
       autoconnect = ["qemu:///system"];
       uris = ["qemu:///system"];
     };
+
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
+      icon-theme = "Adwaita";
+      cursor-theme = "Adwaita";
+    };
   };
 
   # The home.packages option allows you to install Nix packages into your
