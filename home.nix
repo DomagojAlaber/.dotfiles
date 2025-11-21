@@ -93,6 +93,7 @@ in
     brave
     ngrok
     flutter
+    claude-code
   ];
 
 
