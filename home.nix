@@ -95,6 +95,7 @@ in
     flutter
     claude-code
     codex
+    spotifywm
   ];
 
 
