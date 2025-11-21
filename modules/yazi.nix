@@ -5,7 +5,7 @@ let
   yaziFlavors = pkgs.fetchFromGitHub {
     owner = "yazi-rs";
     repo  = "flavors";
-    rev   = "main";
+    rev   = "f6b425a6d57af39c10ddfd94790759f4d7612332";
     # If this hash ever fails, run nix-prefetch and update it.
     hash  = "sha256-bavHcmeGZ49nNeM+0DSdKvxZDPVm3e6eaNmfmwfCid0=";
   };

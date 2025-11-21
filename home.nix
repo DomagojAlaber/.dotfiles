@@ -60,7 +60,6 @@ in
     notepad-next
     traceroute
     vscode
-    spotify
     bash
     zsh
     lshw
@@ -95,7 +94,6 @@ in
     flutter
     claude-code
     codex
-    spotifywm
   ];
 
 

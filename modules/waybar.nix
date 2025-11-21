@@ -397,5 +397,125 @@
     hyprshot
 
     nerd-fonts.space-mono
+    playerctl
   ];
+
+  ############################
+  ##  WAYBAR SUPPORT FILES  ##
+  ############################
+  home.file.".config/waybar/mediaplayer.py" = {
+    text = ''
+      #!/usr/bin/env python3
+
+      import json
+      import subprocess
+      import sys
+      import time
+
+      FORMAT = "{{status}}|{{playerName}}|{{xesam:title}}|{{xesam:artist}}"
+      POLL_INTERVAL = 2
+
+      ICONS = {
+          "spotify": "",
+          "chromium": "",
+          "brave": "",
+      }
+
+      def query_metadata():
+          try:
+              result = subprocess.run(
+                  ["playerctl", "-a", "metadata", "--format", FORMAT],
+                  check=False,
+                  capture_output=True,
+                  text=True,
+              )
+          except FileNotFoundError:
+              return None, "playerctl missing"
+
+          if result.returncode != 0 or not result.stdout.strip():
+              return None, None
+
+          entries = []
+          for raw in result.stdout.splitlines():
+              raw = raw.strip()
+              if not raw:
+                  continue
+              parts = raw.split("|", 3)
+              if len(parts) != 4:
+                  continue
+              status, player, title, artist = parts
+              entries.append(
+                  {
+                      "status": status,
+                      "player": player,
+                      "title": title,
+                      "artist": artist,
+                  }
+              )
+          if not entries:
+              return None, None
+
+          playing = next((entry for entry in entries if entry["status"] == "Playing"), None)
+          return (playing or entries[0]), None
+
+      def payload(entry, message=None):
+          if message:
+              text = message
+              tooltip = message
+              css_class = "error"
+              alt = "error"
+              icon = ""
+          elif entry is None:
+              text = "No player"
+              tooltip = "No active media players"
+              css_class = "idle"
+              alt = "idle"
+              icon = ""
+          else:
+              artist = entry["artist"].strip()
+              title = entry["title"].strip()
+              text = title if not artist else f"{artist} - {title}"
+              tooltip = text
+              css_class = entry["status"].lower()
+              alt = entry["player"]
+              icon = ICONS.get(entry["player"].lower(), "🎜")
+
+          return {
+              "text": f"{icon} {text}",
+              "tooltip": tooltip,
+              "class": css_class,
+              "alt": alt,
+          }
+
+      def main():
+          last = None
+          while True:
+              entry, error = query_metadata()
+              data = payload(entry, error)
+              serialized = json.dumps(data, ensure_ascii=False)
+              if serialized != last:
+                  print(serialized, flush=True)
+                  last = serialized
+              time.sleep(POLL_INTERVAL)
+
+      if __name__ == "__main__":
+          try:
+              main()
+          except KeyboardInterrupt:
+              sys.exit(0)
+    '';
+    executable = true;
+  };
+
+  home.file.".config/waybar/power_menu.xml" = {
+    text = ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <menu id="power-menu">
+        <item label="Suspend" action="suspend"/>
+        <item label="Hibernate" action="hibernate"/>
+        <item label="Reboot" action="reboot"/>
+        <item label="Shutdown" action="shutdown"/>
+      </menu>
+    '';
+  };
 }
