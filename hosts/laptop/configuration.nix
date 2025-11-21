@@ -119,7 +119,7 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "disk" ];
 	  shell = pkgs.zsh;
   };
 
@@ -205,6 +205,9 @@
   ];
 
   services.libinput.mouse.accelProfile = "flat";
+  services.udisks2.enable = true;
+  security.polkit.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
