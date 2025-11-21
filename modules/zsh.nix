@@ -7,11 +7,9 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # cd into dirs by just typing their name
     autocd = true;
 
-    # keep zsh configs under XDG
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     history = {
       size = 20000;
