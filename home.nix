@@ -101,7 +101,6 @@ in
     ngrok
     flutter
     codex
-    spotify
   ];
 
 
