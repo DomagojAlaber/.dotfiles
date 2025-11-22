@@ -130,7 +130,6 @@
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
         "$mainMod, S, exec, rofi -show drun -show-icons"
         "$mainMod, O, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mainMod, PRINT, exec, hyprshot -m region --clipboard-only"

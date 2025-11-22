@@ -89,6 +89,7 @@ in
     lazygit
     cliphist
     nerd-fonts.jetbrains-mono
+    nerd-fonts.space-mono
     wlsunset
     davinci-resolve
     obsidian
