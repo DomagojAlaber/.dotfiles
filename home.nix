@@ -58,15 +58,11 @@ in
     nodejs
     zapzap
     neovim
-    thunderbird
-    libreoffice
     discord
-    pgadmin4
     dbeaver-bin
     bun
     notepad-next
     traceroute
-    vscode
     bash
     zsh
     lshw
@@ -101,6 +97,7 @@ in
     ngrok
     flutter
     codex
+    ffmpeg
   ];
 
 

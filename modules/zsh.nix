@@ -85,8 +85,6 @@
       zstyle ':vcs_info:*' enable git'';
   };
 
-  # Optional but highly recommended to go with this Zsh setup:
-
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
