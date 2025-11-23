@@ -98,6 +98,8 @@ in
     flutter
     codex
     ffmpeg
+    nixd
+    zed-editor
   ];
 
 
