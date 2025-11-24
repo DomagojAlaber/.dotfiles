@@ -105,6 +105,7 @@ in
     nixd
     zed-editor
     killall
+    svelte-language-server
   ];
 
 
