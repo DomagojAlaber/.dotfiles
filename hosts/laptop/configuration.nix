@@ -101,6 +101,9 @@
     defaultSession = "hyprland";
   };
   services.desktopManager.gnome.enable = true;
+  environment.gnome.excludePackages = with pkgs; [
+    orca # prevent GNOME from auto-starting the Orca screen reader
+  ];
 
   services.blueman.enable = true;
   # Configure keymap in X11

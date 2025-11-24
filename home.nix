@@ -36,6 +36,10 @@ in
       uris = ["qemu:///system"];
     };
 
+    "org/gnome/desktop/a11y/applications" = {
+      screen-reader-enabled = false;
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       gtk-theme = "Adwaita-dark";
@@ -100,7 +104,7 @@ in
     ffmpeg
     nixd
     zed-editor
-    vulkan-tools
+    killall
   ];
 
 
