@@ -18,14 +18,14 @@ in
   imports = importAllNix ./modules;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  # TODO: Please make this file the "master file" 
+  # TODO: Please make this file the "master file"
   # and move all modules into some folder and pick them up into this one.
 
   home.username = "domagoj";
   home.homeDirectory = "/home/domagoj";
 
   home.stateVersion = "24.11"; # DO NOT CHANGE THIS VALUE.
-  
+
   programs.chromium = {
     enable = true;
   };
@@ -100,6 +100,7 @@ in
     ffmpeg
     nixd
     zed-editor
+    vulkan-tools
   ];
 
 

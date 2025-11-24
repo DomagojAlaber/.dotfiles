@@ -33,6 +33,7 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -65,6 +66,9 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  environment.sessionVariables.VK_ICD_FILENAMES =
+      "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
 
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
