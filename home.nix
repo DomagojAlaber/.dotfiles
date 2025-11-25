@@ -106,6 +106,7 @@ in
     zed-editor
     killall
     svelte-language-server
+    tmux
   ];
 
 
