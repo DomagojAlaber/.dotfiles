@@ -16,10 +16,6 @@ in
 {
   # This will import every .nix file from ./modules
   imports = importAllNix ./modules;
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  # TODO: Please make this file the "master file"
-  # and move all modules into some folder and pick them up into this one.
 
   home.username = "domagoj";
   home.homeDirectory = "/home/domagoj";
@@ -145,6 +141,5 @@ in
     # EDITOR = "emacs";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
