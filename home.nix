@@ -103,6 +103,7 @@ in
     killall
     svelte-language-server
     tmux
+    gitflow
   ];
 
 

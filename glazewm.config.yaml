@@ -1,0 +1,135 @@
+# Hyprland-inspired GlazeWM config.
+# Drop this into %USERPROFILE%/.glaze-wm/config.yaml on the other machine.
+# App commands point to sensible Windows defaults; swap them if you use different programs.
+
+general:
+  # Hyprland uses SUPER as the main modifier.
+  mod: win
+  focus_follows_cursor: true
+
+gaps:
+  inner_gap: 2
+  outer_gap: 10
+
+focus_borders:
+  active:
+    color: "#9932cc"
+    thickness: 2
+  inactive:
+    color: "#cba6f7"
+    thickness: 2
+
+workspaces:
+  - name: "1"
+    binding: "win+1"
+  - name: "2"
+    binding: "win+2"
+  - name: "3"
+    binding: "win+3"
+  - name: "4"
+    binding: "win+4"
+  - name: "5"
+    binding: "win+5"
+  - name: "6"
+    binding: "win+6"
+  - name: "7"
+    binding: "win+7"
+  - name: "8"
+    binding: "win+8"
+  - name: "9"
+    binding: "win+9"
+  - name: "10"
+    binding: "win+0"
+
+keybindings:
+  # Launchers and helpers (match Hyprland bindings)
+  - binding: "win+enter"
+    command: "exec wt.exe" # terminal
+  - binding: "win+e"
+    command: "exec explorer.exe" # file manager
+
+  # Window management
+  - binding: "win+c"
+    command: "close"
+  - binding: "win+v"
+    command: "toggle floating"
+  - binding: "win+m"
+    command: "quit" # exit GlazeWM
+
+  # Focus movement (arrow keys and vim-style)
+  - binding: "win+left"
+    command: "focus left"
+  - binding: "win+right"
+    command: "focus right"
+  - binding: "win+up"
+    command: "focus up"
+  - binding: "win+down"
+    command: "focus down"
+  - binding: "win+h"
+    command: "focus left"
+  - binding: "win+l"
+    command: "focus right"
+  - binding: "win+k"
+    command: "focus up"
+  - binding: "win+j"
+    command: "focus down"
+
+  # Move windows
+  - binding: "win+shift+left"
+    command: "move left"
+  - binding: "win+shift+right"
+    command: "move right"
+  - binding: "win+shift+up"
+    command: "move up"
+  - binding: "win+shift+down"
+    command: "move down"
+  - binding: "win+shift+h"
+    command: "move left"
+  - binding: "win+shift+l"
+    command: "move right"
+  - binding: "win+shift+k"
+    command: "move up"
+  - binding: "win+shift+j"
+    command: "move down"
+
+  # Workspace navigation
+  - binding: "win+1"
+    command: "workspace 1"
+  - binding: "win+2"
+    command: "workspace 2"
+  - binding: "win+3"
+    command: "workspace 3"
+  - binding: "win+4"
+    command: "workspace 4"
+  - binding: "win+5"
+    command: "workspace 5"
+  - binding: "win+6"
+    command: "workspace 6"
+  - binding: "win+7"
+    command: "workspace 7"
+  - binding: "win+8"
+    command: "workspace 8"
+  - binding: "win+9"
+    command: "workspace 9"
+  - binding: "win+0"
+    command: "workspace 10"
+  - binding: "win+shift+1"
+    command: "move to workspace 1"
+  - binding: "win+shift+2"
+    command: "move to workspace 2"
+  - binding: "win+shift+3"
+    command: "move to workspace 3"
+  - binding: "win+shift+4"
+    command: "move to workspace 4"
+  - binding: "win+shift+5"
+    command: "move to workspace 5"
+  - binding: "win+shift+6"
+    command: "move to workspace 6"
+  - binding: "win+shift+7"
+    command: "move to workspace 7"
+  - binding: "win+shift+8"
+    command: "move to workspace 8"
+  - binding: "win+shift+9"
+    command: "move to workspace 9"
+  - binding: "win+shift+0"
+    command: "move to workspace 10"
