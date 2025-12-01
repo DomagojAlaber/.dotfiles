@@ -104,6 +104,7 @@ in
     svelte-language-server
     tmux
     gitflow
+    nixfmt
   ];
 
 
