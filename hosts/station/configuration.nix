@@ -1,16 +1,16 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/nixos/gc.nix
-      ../../modules/nixos/vial-udev.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos/gc.nix
+    ../../modules/nixos/vial-udev.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot = {
@@ -83,13 +83,13 @@
   services.printing.enable = true;
 
   services.printing.drivers = with pkgs; [
-    hplip           # open‑source HP driver
+    hplip # open‑source HP driver
     hplipWithPlugin # includes HP’s proprietary plugin for full feature support
   ];
 
   services.avahi = {
-    enable   = true;
-    nssmdns4 = true;  # lets the system resolve *.local via Avahi/Multicast DNS
+    enable = true;
+    nssmdns4 = true; # lets the system resolve *.local via Avahi/Multicast DNS
   };
 
   services.pipewire = {
@@ -108,8 +108,14 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "gamemode" "vboxusers"];
-	  shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "gamemode"
+      "vboxusers"
+    ];
+    shell = pkgs.zsh;
   };
 
   # GDM auto-login is configured above; keep these TTYs disabled so it works reliably.
@@ -119,7 +125,10 @@
   systemd.services."autovt@tty1".enable = false;
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
+  ];
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -169,7 +178,8 @@
     traceroute
     virt-manager
     virt-viewer
-    spice spice-gtk
+    spice
+    spice-gtk
     spice-protocol
     win-virtio
     win-spice
@@ -206,5 +216,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }
