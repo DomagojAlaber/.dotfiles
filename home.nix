@@ -1,17 +1,22 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 let
   # importAllNix: path -> [ path ]
   # Returns a list of all .nix files in the given directory (non-recursive).
-  importAllNix = dir:
+  importAllNix =
+    dir:
     let
       files = builtins.readDir dir;
       # keep only regular files that end with ".nix"
-      nixFiles = lib.filterAttrs (name: type:
-        type == "regular" && lib.hasSuffix ".nix" name
-      ) files;
+      nixFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) files;
     in
-      map (name: dir + "/${name}") (builtins.attrNames nixFiles);
+    map (name: dir + "/${name}") (builtins.attrNames nixFiles);
 in
 {
   # This will import every .nix file from ./modules
@@ -28,8 +33,8 @@ in
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
 
     "org/gnome/desktop/a11y/applications" = {
@@ -105,8 +110,8 @@ in
     tmux
     gitflow
     nixfmt
+    vial
   ];
-
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
