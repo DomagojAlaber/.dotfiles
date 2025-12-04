@@ -7,8 +7,6 @@
 }:
 
 let
-  # importAllNix: path -> [ path ]
-  # Returns a list of all .nix files in the given directory (non-recursive).
   importAllNix =
     dir:
     let
@@ -111,6 +109,7 @@ in
     gitflow
     nixfmt
     vial
+    via
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

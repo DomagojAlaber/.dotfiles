@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/gc.nix
+      ../../modules/nixos/vial-udev.nix
     ];
 
   # Bootloader.
