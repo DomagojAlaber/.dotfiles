@@ -11,13 +11,11 @@ let
     dir:
     let
       files = builtins.readDir dir;
-      # keep only regular files that end with ".nix"
       nixFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) files;
     in
     map (name: dir + "/${name}") (builtins.attrNames nixFiles);
 in
 {
-  # This will import every .nix file from ./modules
   imports = importAllNix ./modules;
 
   home.username = "domagoj";
