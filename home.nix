@@ -108,6 +108,7 @@ in
     nixfmt
     vial
     php
+    spotify
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

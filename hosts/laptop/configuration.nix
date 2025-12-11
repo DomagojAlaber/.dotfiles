@@ -5,12 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/nixos/gc.nix
-      ../../modules/nixos/vial-udev.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../modules/nixos/gc.nix
+    ../../modules/nixos/vial-udev.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot = {
@@ -38,7 +38,7 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
@@ -47,15 +47,15 @@
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
     powerManagement.enable = false;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
@@ -68,8 +68,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  environment.sessionVariables.VK_ICD_FILENAMES =
-      "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+  environment.sessionVariables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
 
   # Set your time zone.
   time.timeZone = "Europe/Zagreb";
@@ -119,6 +118,7 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.unprivilegedUsernsClone = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -139,20 +139,26 @@
   users.users.domagoj = {
     isNormalUser = true;
     description = "DomagojAlaber";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "disk" ];
-	  shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "libvirtd"
+      "disk"
+    ];
+    shell = pkgs.zsh;
   };
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  #Hyprland 
+  #Hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-	
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
@@ -175,7 +181,7 @@
 
   # Virtualisaton attempt
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["domagoj"];
+  users.groups.libvirtd.members = [ "domagoj" ];
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -183,13 +189,13 @@
     };
   };
   virtualisation.spiceUSBRedirection.enable = true;
-  services.spice-vdagentd.enable = true;  
+  services.spice-vdagentd.enable = true;
 
   # Enable dconf (System Management Tool)
   programs.dconf.enable = true;
 
   environment.pathsToLink = [ "/share/zsh" ];
-  
+
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -224,7 +230,6 @@
   services.udisks2.enable = true;
   security.polkit.enable = true;
 
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -252,5 +257,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }
