@@ -107,6 +107,7 @@ in
     gitflow
     nixfmt
     vial
+    php
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
