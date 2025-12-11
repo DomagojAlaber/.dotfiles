@@ -1,5 +1,20 @@
 { config, pkgs, ... }:
 
+let
+  thm_bg = "#1e1e2e"; # base
+  thm_fg = "#cdd6f4"; # text
+  thm_cyan = "#89dceb"; # sky
+  thm_black = "#11111b"; # crust
+  thm_gray = "#313244"; # surface0
+  thm_magenta = "#cba6f7"; # mauve
+  thm_pink = "#f5c2e7"; # pink
+  thm_red = "#f38ba8"; # red
+  thm_green = "#a6e3a1"; # green
+  thm_yellow = "#f9e2af"; # yellow
+  thm_blue = "#89b4fa"; # blue
+  thm_orange = "#fab387"; # peach
+  thm_black4 = "#45475a"; # surface1
+in
 {
   programs.tmux = {
     enable = true;
@@ -55,56 +70,41 @@
       bind -n M-8 select-window -t 8
       bind -n M-9 select-window -t 9
 
-      # Catppuccin Mocha theme colors
-      thm_bg="#1e1e2e"       # base
-      thm_fg="#cdd6f4"       # text
-      thm_cyan="#89dceb"     # sky
-      thm_black="#11111b"    # crust
-      thm_gray="#313244"     # surface0
-      thm_magenta="#cba6f7"  # mauve
-      thm_pink="#f5c2e7"     # pink
-      thm_red="#f38ba8"      # red
-      thm_green="#a6e3a1"    # green
-      thm_yellow="#f9e2af"   # yellow
-      thm_blue="#89b4fa"     # blue
-      thm_orange="#fab387"   # peach
-      thm_black4="#45475a"   # surface1
-
       # Status bar
       set -g status on
-      set -g status-style "bg=#{@thm_bg}"
+      set -g status-style "bg=${thm_bg}"
       set -g status-justify "left"
       set -g status-left-length 100
       set -g status-right-length 100
 
       # Messages
-      set -g message-style "fg=#{@thm_cyan},bg=#{@thm_gray},align=centre"
-      set -g message-command-style "fg=#{@thm_cyan},bg=#{@thm_gray},align=centre"
+      set -g message-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
+      set -g message-command-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
 
       # Panes
-      set -g pane-border-style "fg=#{@thm_gray}"
-      set -g pane-active-border-style "fg=#{@thm_blue}"
+      set -g pane-border-style "fg=${thm_gray}"
+      set -g pane-active-border-style "fg=${thm_blue}"
 
       # Windows
-      set -g window-status-activity-style "fg=#{@thm_fg},bg=#{@thm_bg},none"
+      set -g window-status-activity-style "fg=${thm_fg},bg=${thm_bg},none"
       set -g window-status-separator ""
-      set -g window-status-style "fg=#{@thm_fg},bg=#{@thm_bg},none"
+      set -g window-status-style "fg=${thm_fg},bg=${thm_bg},none"
 
       # Statusline - current window
-      set -g window-status-current-format "#[fg=#{@thm_blue},bg=#{@thm_bg}] #I: #[fg=#{@thm_magenta},bg=#{@thm_bg}](✓) #[fg=#{@thm_cyan},bg=#{@thm_bg}]#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #[fg=#{@thm_magenta},bg=#{@thm_bg}]"
+      set -g window-status-current-format "#[fg=${thm_blue},bg=${thm_bg}] #I: #[fg=${thm_magenta},bg=${thm_bg}](✓) #[fg=${thm_cyan},bg=${thm_bg}]#(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #[fg=${thm_magenta},bg=${thm_bg}]"
 
       # Statusline - other windows
-      set -g window-status-format "#[fg=#{@thm_blue},bg=#{@thm_bg}] #I: #[fg=#{@thm_fg},bg=#{@thm_bg}]#W"
+      set -g window-status-format "#[fg=${thm_blue},bg=${thm_bg}] #I: #[fg=${thm_fg},bg=${thm_bg}]#W"
 
       # Statusline - right side
-      set -g status-right "#[fg=#{@thm_blue},bg=#{@thm_bg},nobold,nounderscore,noitalics]#[fg=#{@thm_bg},bg=#{@thm_blue},nobold,nounderscore,noitalics] #[fg=#{@thm_fg},bg=#{@thm_gray}] #W #{?client_prefix,#[fg=#{@thm_magenta}],#[fg=#{@thm_cyan}]}#[bg=#{@thm_gray}]#{?client_prefix,#[bg=#{@thm_magenta}],#[bg=#{@thm_cyan}]}#[fg=#{@thm_bg}] #[fg=#{@thm_fg},bg=#{@thm_gray}] #S "
+      set -g status-right "#[fg=${thm_blue},bg=${thm_bg},nobold,nounderscore,noitalics]#[fg=${thm_bg},bg=${thm_blue},nobold,nounderscore,noitalics] #[fg=${thm_fg},bg=${thm_gray}] #W #{?client_prefix,#[fg=${thm_magenta}],#[fg=${thm_cyan}]}#[bg=${thm_gray}]#{?client_prefix,#[bg=${thm_magenta}],#[bg=${thm_cyan}]}#[fg=${thm_bg}] #[fg=${thm_fg},bg=${thm_gray}] #S "
 
       # Statusline - left side (empty)
       set -g status-left ""
 
       # Modes
-      set -g clock-mode-colour "#{@thm_blue}"
-      set -g mode-style "fg=#{@thm_blue} bg=#{@thm_black4} bold"
+      set -g clock-mode-colour "${thm_blue}"
+      set -g mode-style "fg=${thm_blue} bg=${thm_black4} bold"
     '';
   };
 }
