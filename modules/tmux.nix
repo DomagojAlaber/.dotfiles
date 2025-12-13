@@ -4,15 +4,9 @@ let
   thm_bg = "#1e1e2e"; # base
   thm_fg = "#cdd6f4"; # text
   thm_cyan = "#89dceb"; # sky
-  thm_black = "#11111b"; # crust
   thm_gray = "#313244"; # surface0
   thm_magenta = "#cba6f7"; # mauve
-  thm_pink = "#f5c2e7"; # pink
-  thm_red = "#f38ba8"; # red
-  thm_green = "#a6e3a1"; # green
-  thm_yellow = "#f9e2af"; # yellow
   thm_blue = "#89b4fa"; # blue
-  thm_orange = "#fab387"; # peach
   thm_black4 = "#45475a"; # surface1
 in
 {
