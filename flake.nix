@@ -9,41 +9,50 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/laptop/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.domagoj = import ./home.nix;
-            nixpkgs.config.allowUnfree = true;
-            nixpkgs.config.allowUnfreePredicate = (_: true);
-          }
-        ];
-      };
-      station = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/station/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.domagoj = import ./home.nix;
-            nixpkgs.config.allowUnfree = true;
-            nixpkgs.config.allowUnfreePredicate = (_: true);
-          }
-        ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/laptop/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.overwriteBackup = true;
+              home-manager.users.domagoj = import ./home.nix;
+              nixpkgs.config.allowUnfree = true;
+              nixpkgs.config.allowUnfreePredicate = (_: true);
+            }
+          ];
+        };
+        station = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/station/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.overwriteBackup = true;
+              home-manager.users.domagoj = import ./home.nix;
+              nixpkgs.config.allowUnfree = true;
+              nixpkgs.config.allowUnfreePredicate = (_: true);
+            }
+          ];
+        };
       };
     };
-  };
 
 }
