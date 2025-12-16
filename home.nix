@@ -48,9 +48,7 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    vim
     kitty
-    htop
     wget
     neofetch
     vscode
@@ -67,15 +65,12 @@ in
     bash
     zsh
     lshw
-    fastfetch
     seahorse
     sqlite
     gcc
     libgcc
     tmux
     drawio
-    jdk
-    sweethome3d.application
     postman
     uv
     dxvk
@@ -84,7 +79,6 @@ in
     protonup-qt
     air
     lazygit
-    cliphist
     nerd-fonts.jetbrains-mono
     nerd-fonts.space-mono
     wlsunset
@@ -96,14 +90,12 @@ in
     nicotine-plus
     brave
     ngrok
-    flutter
     codex
     ffmpeg
     nixd
     zed-editor
     killall
     svelte-language-server
-    tmux
     gitflow
     nixfmt
     vial
