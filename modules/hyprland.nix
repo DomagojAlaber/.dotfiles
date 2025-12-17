@@ -39,7 +39,7 @@
       ### LOOK AND FEEL ###
       #####################
       general = {
-        gaps_in = 2;
+        gaps_in = 1;
         gaps_out = 10;
         border_size = 2;
 
@@ -53,8 +53,8 @@
 
       decoration = {
         rounding = 5;
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        active_opacity = 0.95;
+        inactive_opacity = 0.90;
       };
 
       # Using the “fancy” animations block from the bottom of your config
