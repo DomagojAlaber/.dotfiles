@@ -100,6 +100,14 @@ in
     php
     spotify
     ripgrep
+    jq
+    curl
+    unzip
+    zip
+    tree
+    htop
+    bat
+    eza
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -135,6 +135,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   programs.zsh.enable = true;
+
+  programs.nix-ld.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.domagoj = {
     isNormalUser = true;
@@ -199,9 +201,6 @@
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    neofetch
     vscode
     git
     nodejs
@@ -220,7 +219,6 @@
     eww
     dunst
     swww
-    kitty
     rofi
     mixxx
     swtpm
