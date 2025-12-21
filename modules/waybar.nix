@@ -355,15 +355,11 @@
         };
 
         "custom/media" = {
-          "format" = "{icon} {text}";
+          "format" = " {text}";
           "return-type" = "json";
           "max-length" = 40;
-          "format-icons" = {
-            "spotify" = "";
-            "default" = "🎜";
-          };
           "escape" = true;
-          "exec" = "$HOME/.config/waybar/mediaplayer.py 2> /dev/null";
+          "exec" = "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null";
         };
 
         "custom/power" = {
@@ -408,6 +404,7 @@
     text = ''
       #!/usr/bin/env python3
 
+      import argparse
       import json
       import subprocess
       import sys
@@ -416,16 +413,17 @@
       FORMAT = "{{status}}|{{playerName}}|{{xesam:title}}|{{xesam:artist}}"
       POLL_INTERVAL = 2
 
-      ICONS = {
-          "spotify": "",
-          "chromium": "",
-          "brave": "",
-      }
-
-      def query_metadata():
+      def query_metadata(player=None):
           try:
+              command = ["playerctl"]
+              if player:
+                  command += ["--player", player]
+              else:
+                  command += ["-a"]
+              command += ["metadata", "--format", FORMAT]
+
               result = subprocess.run(
-                  ["playerctl", "-a", "metadata", "--format", FORMAT],
+                  command,
                   check=False,
                   capture_output=True,
                   text=True,
@@ -444,11 +442,11 @@
               parts = raw.split("|", 3)
               if len(parts) != 4:
                   continue
-              status, player, title, artist = parts
+              status, player_name, title, artist = parts
               entries.append(
                   {
                       "status": status,
-                      "player": player,
+                      "player": player_name,
                       "title": title,
                       "artist": artist,
                   }
@@ -465,13 +463,11 @@
               tooltip = message
               css_class = "error"
               alt = "error"
-              icon = ""
           elif entry is None:
               text = "No player"
               tooltip = "No active media players"
               css_class = "idle"
               alt = "idle"
-              icon = ""
           else:
               artist = entry["artist"].strip()
               title = entry["title"].strip()
@@ -479,19 +475,22 @@
               tooltip = text
               css_class = entry["status"].lower()
               alt = entry["player"]
-              icon = ICONS.get(entry["player"].lower(), "🎜")
 
           return {
-              "text": f"{icon} {text}",
+              "text": text,
               "tooltip": tooltip,
               "class": css_class,
               "alt": alt,
           }
 
       def main():
+          parser = argparse.ArgumentParser(add_help=False)
+          parser.add_argument("--player", dest="player", default=None)
+          args = parser.parse_args()
+
           last = None
           while True:
-              entry, error = query_metadata()
+              entry, error = query_metadata(args.player)
               data = payload(entry, error)
               serialized = json.dumps(data, ensure_ascii=False)
               if serialized != last:
