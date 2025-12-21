@@ -41,6 +41,14 @@
         gaps_out = 10;
         border_size = 2;
 
+        snap = {
+          enabled = true;
+          window_gap = 8;
+          monitor_gap = 10;
+          respect_gaps = false;
+          border_overlap = false;
+        };
+
         "col.active_border" = "rgba(9932ccff)";
         "col.inactive_border" = "rgba(cba6f7cc)";
 
@@ -68,22 +76,22 @@
         ];
 
         animation = [
-          "global, 1, 10, default"
-          "border, 1, 5.39, easeOutQuint"
-          "windows, 1, 4.79, easeOutQuint"
-          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
-          "windowsOut, 1, 1.49, linear, popin 87%"
-          "fadeIn, 1, 1.73, almostLinear"
-          "fadeOut, 1, 1.46, almostLinear"
-          "fade, 1, 3.03, quick"
-          "layers, 1, 3.81, easeOutQuint"
-          "layersIn, 1, 4, easeOutQuint, fade"
-          "layersOut, 1, 1.5, linear, fade"
-          "fadeLayersIn, 1, 1.79, almostLinear"
-          "fadeLayersOut, 1, 1.39, almostLinear"
-          "workspaces, 1, 1.94, almostLinear, fade"
-          "workspacesIn, 1, 1.21, almostLinear, fade"
-          "workspacesOut, 1, 1.94, almostLinear, fade"
+          "global, 1, 6, default"
+          "border, 1, 3.5, easeOutQuint"
+          "windows, 1, 3, easeOutQuint"
+          "windowsIn, 1, 2.6, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1, linear, popin 87%"
+          "fadeIn, 1, 1.2, almostLinear"
+          "fadeOut, 1, 1, almostLinear"
+          "fade, 1, 2, quick"
+          "layers, 1, 2.5, easeOutQuint"
+          "layersIn, 1, 2.6, easeOutQuint, fade"
+          "layersOut, 1, 1, linear, fade"
+          "fadeLayersIn, 1, 1.2, almostLinear"
+          "fadeLayersOut, 1, 1, almostLinear"
+          "workspaces, 1, 1.3, almostLinear, fade"
+          "workspacesIn, 1, 1, almostLinear, fade"
+          "workspacesOut, 1, 1.3, almostLinear, fade"
         ];
       };
 
