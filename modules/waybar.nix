@@ -397,6 +397,7 @@
     hyprshot
 
     nerd-fonts.space-mono
+    python3
     playerctl
   ];
 
