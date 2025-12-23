@@ -13,6 +13,10 @@
           "@sveltejs/mcp"
         ];
       };
+      mcp_servers.better_auth = {
+        url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
+        enabled = true;
+      };
     };
 
     custom-instructions = ''
