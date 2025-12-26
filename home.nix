@@ -53,7 +53,6 @@ in
     git
     go
     nodejs
-    zapzap
     neovim
     discord
     dbeaver-bin
