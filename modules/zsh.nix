@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   programs.zsh = {
@@ -23,31 +23,31 @@
 
     shellAliases = {
       # ls
-      ls  = "ls --color=auto";
-      ll  = "ls -lh";
-      la  = "ls -A";
-      l   = "ls -CF";
+      ls = "ls --color=auto";
+      ll = "ls -lh";
+      la = "ls -A";
+      l = "ls -CF";
 
       # git
-      g   = "git";
-      ga  = "git add";
-      gc  = "git commit";
+      g = "git";
+      ga = "git add";
+      gc = "git commit";
       gst = "git status -sb";
-      gl  = "git log --oneline --graph --decorate";
+      gl = "git log --oneline --graph --decorate";
 
       # nix
       update = "sudo nixos-rebuild switch --flake";
-      nhist  = "nix profile history"; # example extra
+      nhist = "nix profile history"; # example extra
 
       # misc
-      cls   = "clear";
-      grep  = "grep --color=auto";
+      cls = "clear";
+      grep = "grep --color=auto";
     };
 
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      PAGER  = "less -R";
+      PAGER = "less -R";
       LESSHISTFILE = "-";
     };
 
