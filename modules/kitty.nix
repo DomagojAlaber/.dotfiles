@@ -4,6 +4,7 @@
   programs.kitty = {
     enable = true;
 
+    font.name = "IosevkaTerm Nerd Font";
     themeFile = "Catppuccin-Mocha";
 
     settings = {
