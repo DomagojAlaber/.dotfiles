@@ -78,6 +78,9 @@ in
     lazygit
     nerd-fonts.jetbrains-mono
     nerd-fonts.space-mono
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+    nerd-fonts.zed-mono
     wlsunset
     davinci-resolve
     obsidian
