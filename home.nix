@@ -57,7 +57,6 @@ in
     discord
     dbeaver-bin
     bun
-    notepad-next
     traceroute
     bash
     zsh

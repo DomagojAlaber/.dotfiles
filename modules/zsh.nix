@@ -82,7 +82,11 @@
       # --- git-aware prompt using built-in vcs_info ---
       autoload -Uz vcs_info
       zstyle ':vcs_info:git:*' formats '%F{blue}(%b)%f '
-      zstyle ':vcs_info:*' enable git'';
+      zstyle ':vcs_info:*' enable git
+
+      precmd() { vcs_info }
+      setopt prompt_subst
+      PROMPT='%F{green}%n@%m%f %F{yellow}%~%f ''${vcs_info_msg_0_:-}%# '';
   };
 
   programs.fzf = {
