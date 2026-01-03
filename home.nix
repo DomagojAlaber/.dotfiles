@@ -89,7 +89,6 @@ in
     nicotine-plus
     brave
     ngrok
-    codex
     ffmpeg
     nixd
     zed-editor
