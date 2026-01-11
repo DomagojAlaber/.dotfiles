@@ -86,7 +86,7 @@
 
       precmd() { vcs_info }
       setopt prompt_subst
-      PROMPT='%F{green}%n@%m%f %F{yellow}%in%f ''${vcs_info_msg_0_:-}%# ';
+      PROMPT='%F{green}%n@%m%f %F{yellow}%~%f ''${vcs_info_msg_0_:-}%# ';
     '';
   };
 
