@@ -110,6 +110,7 @@ in
     eza
     gh
     sqlc
+    typescript
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
