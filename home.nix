@@ -145,7 +145,8 @@ in
   #  /etc/profiles/per-user/domagoj/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   programs.home-manager.enable = true;
