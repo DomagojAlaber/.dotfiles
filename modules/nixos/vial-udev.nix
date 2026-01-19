@@ -5,4 +5,5 @@
   services.udev.extraRules = ''
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="55d4", ATTRS{idProduct}=="0664", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
   '';
+  services.tailscale.enable = true;
 }
