@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -9,6 +5,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/gc.nix
+    ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
   ];
 
@@ -88,22 +85,17 @@
     LC_TIME = "hr_HR.UTF-8";
   };
 
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager = {
-    gdm.enable = true;
-    autoLogin = {
-      enable = true;
-      user = "domagoj";
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        user = "domagoj";
+      };
     };
-    defaultSession = "hyprland";
   };
-  services.desktopManager.gnome.enable = true;
-  environment.gnome.excludePackages = with pkgs; [
-    orca # prevent GNOME from auto-starting the Orca screen reader
-  ];
 
   services.blueman.enable = true;
   # Configure keymap in X11
@@ -151,7 +143,7 @@
     shell = pkgs.zsh;
   };
 
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  # Let the display manager own tty1.
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 

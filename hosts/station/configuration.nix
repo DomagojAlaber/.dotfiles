@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/gc.nix
+    ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
   ];
 
@@ -57,19 +58,15 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager = {
-    gdm.enable = true;
-    autoLogin = {
-      enable = true;
-      user = "domagoj";
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        user = "domagoj";
+      };
     };
-    defaultSession = "hyprland";
   };
-  services.desktopManager.gnome.enable = true;
-  environment.gnome.excludePackages = with pkgs; [
-    orca # prevent GNOME from auto-starting the Orca screen reader
-  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -97,8 +94,6 @@
     pulse.enable = true;
   };
 
-  services.gnome.gnome-remote-desktop.enable = false;
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   programs.zsh.enable = true;
@@ -116,9 +111,8 @@
     shell = pkgs.zsh;
   };
 
-  # GDM auto-login is configured above; keep these TTYs disabled so it works reliably.
   services.blueman.enable = true;
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  # Let the display manager own tty1.
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
