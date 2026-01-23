@@ -90,8 +90,8 @@
   services.greetd = {
     enable = true;
     settings = {
-      initial_session = {
-        command = "${pkgs.hyprland}/bin/Hyprland";
+      default_session = {
+        command = "Hyprland";
         user = "domagoj";
       };
     };
