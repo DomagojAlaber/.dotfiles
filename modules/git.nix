@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       user = {
-        name  = "Domagoj";
+        name = "DomagojAlaber";
         email = "a.domagoj@hotmail.com";
       };
       init = {
