@@ -196,12 +196,8 @@
     go
     neovim
     kitty
-    thunderbird
-    libreoffice
     discord
-    pgadmin4
     dbeaver-bin
-    python312Packages.fastapi
     bun
     traceroute
     waybar

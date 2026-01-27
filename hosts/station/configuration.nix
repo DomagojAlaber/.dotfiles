@@ -151,7 +151,6 @@
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
     wget
     vscode
     git
@@ -159,12 +158,8 @@
     go
     neovim
     kitty
-    thunderbird
-    libreoffice
     discord
-    pgadmin4
     dbeaver-bin
-    python312Packages.fastapi
     bun
     traceroute
     virt-manager
