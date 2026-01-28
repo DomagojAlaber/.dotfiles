@@ -111,7 +111,10 @@ in
     gh
     sqlc
     typescript
-    sstp
+    networkmanagerapplet
+    ppp
+    openssl
+    netbird
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

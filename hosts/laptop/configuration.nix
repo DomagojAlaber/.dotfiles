@@ -27,6 +27,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = with pkgs; [
+    networkmanager-fortisslvpn
+    networkmanager-iodine
+    networkmanager-l2tp
+    networkmanager-openconnect
+    networkmanager-openvpn
+    networkmanager-sstp
+    networkmanager-strongswan
+    networkmanager-vpnc
+  ];
 
   # Enable OpenGL
   hardware.graphics = {
