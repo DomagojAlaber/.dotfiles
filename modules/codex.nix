@@ -6,13 +6,12 @@
   programs.codex = {
     enable = true;
     settings = {
+
       mcp_servers.svelte = {
-        command = "npx";
-        args = [
-          "-y"
-          "@sveltejs/mcp"
-        ];
+        url = "https://mcp.svelte.dev/mcp";
+        enabled = true;
       };
+
       mcp_servers.better_auth = {
         url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
         enabled = true;
