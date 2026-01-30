@@ -217,10 +217,6 @@
 
       sleep 2
 
-      swww img -o DP-1 ~/Pictures/Wallpapers/mclaren/mclaren_left.jpg &
-      swww img -o DP-2 ~/Pictures/Wallpapers/mclaren/mclaren_center.jpg &
-      swww img -o DP-3 ~/Pictures/Wallpapers/mclaren/mclaren_right.jpg &
-
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
 
