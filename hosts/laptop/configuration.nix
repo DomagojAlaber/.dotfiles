@@ -213,7 +213,6 @@
     waybar
     eww
     dunst
-    swww
     rofi
     mixxx
     swtpm

@@ -386,7 +386,6 @@
     wl-clipboard
     cliphist
     networkmanagerapplet
-    swww
     wlsunset
     kitty
     rofi
