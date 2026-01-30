@@ -183,10 +183,6 @@
         "$mainMod SHIFT, j, movewindow, d"
       ];
 
-      windowrulev2 = [
-        "suppressevent maximize, class:.*"
-      ];
-
       exec-once = [
         "bash ~/.config/hypr/start.sh"
       ];
