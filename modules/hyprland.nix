@@ -217,6 +217,8 @@
 
       sleep 2
 
+      swww immg ~/.dotfiles/Wallpapers/nixos_catpuccin.jpg
+
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
 
