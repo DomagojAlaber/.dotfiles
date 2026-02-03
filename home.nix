@@ -105,7 +105,7 @@ in
     unzip
     zip
     tree
-    htop
+    btop
     bat
     eza
     gh
