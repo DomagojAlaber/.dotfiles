@@ -64,6 +64,7 @@ in
     keyboards.sofle = {
       devices = [
         "/dev/input/by-id/usb-Telink_Trust_Deskset-if01-event-kbd"
+        "/dev/input/by-id/usb-MTKB_W-SOFLE_vial:f64c2b3c-event-kbd"
       ];
       extraDefCfg = "process-unmapped-keys yes";
       config = kanataConfig;
