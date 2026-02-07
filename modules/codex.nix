@@ -6,6 +6,8 @@
   programs.codex = {
     enable = true;
     settings = {
+      model = "gpt-5.2-codex";
+      model_reasoning_effort = "xhigh";
 
       mcp_servers.svelte = {
         url = "https://mcp.svelte.dev/mcp";
