@@ -2,11 +2,6 @@
 
 let
   kanataConfig = ''
-    (defcfg
-      process-unmapped-keys yes
-      ;; Optional but often helps with home-row mods:
-      ;; concurrent-tap-hold yes
-    )
 
     (defvar
       tap-time 200
@@ -66,7 +61,11 @@ in
 {
   services.kanata = {
     enable = true;
-    keyboards = {
+    keyboards.sofle = {
+      devices = [
+        "/dev/input/by-id/usb-Telink_Trust_Deskset-if01-event-kbd"
+      ];
+      extraDefCfg = "process-unmapped-keys yes";
       config = kanataConfig;
     };
   };
