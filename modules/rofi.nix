@@ -7,12 +7,8 @@ in
   programs.rofi = {
     enable = true;
 
-    # If you're on Wayland/Hyprland, you probably want this:
-    # package = pkgs.rofi-wayland;
-
     theme = {
       "*" = {
-        # --- Catppuccin Mocha palette (your catpuccin-mocha.rasi) ---
         rosewater = mkLiteral "#f5e0dc";
         flamingo = mkLiteral "#f2cdcd";
         pink = mkLiteral "#f5c2e7";
@@ -40,7 +36,6 @@ in
         mantle = mkLiteral "#181825";
         crust = mkLiteral "#11111b";
 
-        # --- Your config.rasi variables ---
         "selected-active-foreground" = mkLiteral "@background";
         lightfg = mkLiteral "@text";
         separatorcolor = mkLiteral "@foreground";
@@ -241,12 +236,5 @@ in
         "text-color" = mkLiteral "inherit";
       };
     };
-
-    # Optional: real rofi configuration (goes into `configuration {}`),
-    # not theming. Example:
-    # extraConfig = {
-    #   show-icons = true;
-    #   modi = "drun,run,ssh";
-    # };
   };
 }
