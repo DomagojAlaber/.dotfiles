@@ -113,8 +113,6 @@ in
     networkmanagerapplet
     ppp
     openssl
-    netbird
-    netbird-ui
     obs-studio
   ];
 
