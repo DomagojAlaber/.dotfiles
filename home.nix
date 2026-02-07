@@ -49,7 +49,6 @@ in
     kitty
     wget
     neofetch
-    vscode
     git
     go
     nodejs

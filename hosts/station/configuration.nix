@@ -9,6 +9,7 @@
     ../../modules/nixos/gc.nix
     ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
+    ../../modules/nixos/kanata.nix
   ];
 
   # Bootloader.
@@ -152,7 +153,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    vscode
     git
     nodejs
     go

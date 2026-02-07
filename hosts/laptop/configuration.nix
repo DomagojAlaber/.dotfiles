@@ -7,6 +7,7 @@
     ../../modules/nixos/gc.nix
     ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
+    ../../modules/nixos/kanata.nix
   ];
 
   # Bootloader.
@@ -200,7 +201,6 @@
   #List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vscode
     git
     nodejs
     go

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 let
   kanataConfig = ''
@@ -64,7 +64,10 @@ let
   '';
 in
 {
-  home.packages = [ pkgs.kanata ];
-
-  home.file.".config/kanata/kanata.kbd".text = kanataConfig;
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      config = kanataConfig;
+    };
+  };
 }
