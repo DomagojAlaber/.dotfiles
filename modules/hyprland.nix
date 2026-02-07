@@ -221,6 +221,7 @@
 
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
+      wl-paste --watch cliphist store -max-items 2000 &
 
       wlsunset -s 21:00 -S 07:00 -t 3000 -T 6500 &
 
