@@ -1,122 +1,252 @@
-{ ... }:
+{ config, pkgs, ... }:
 
+let
+  inherit (config.lib.formats.rasi) mkLiteral;
+in
 {
-  home.file.".config/rofi/config.rasi".text = ''
-    configuration {
-      modi: "drun,run,window";
-      show-icons: true;
-      icon-theme: "Adwaita";
-      font: "IosevkaTerm Nerd Font 12";
-      matching: "fuzzy";
-      sort: true;
-      drun-display-format: "{icon} {name}";
-      window-format: "{w} - {c} - {t}";
-      display-drun: "Apps";
-      display-run: "Run";
-      display-window: "Windows";
-    }
+  programs.rofi = {
+    enable = true;
 
-    @theme "amethyst"
-  '';
+    # If you're on Wayland/Hyprland, you probably want this:
+    # package = pkgs.rofi-wayland;
 
-  home.file.".config/rofi/themes/amethyst.rasi".text = ''
-    * {
-      bg: #0f0f16;
-      bg-alt: #17172a;
-      bg-alt-2: #1f1f35;
-      fg: #e6e1e8;
-      fg-muted: #b9a6d4;
-      accent: #cba6f7;
-      accent-strong: #9932cc;
-      border: #cba6f7;
+    theme = {
+      "*" = {
+        # --- Catppuccin Mocha palette (your catpuccin-mocha.rasi) ---
+        rosewater = mkLiteral "#f5e0dc";
+        flamingo = mkLiteral "#f2cdcd";
+        pink = mkLiteral "#f5c2e7";
+        mauve = mkLiteral "#cba6f7";
+        red = mkLiteral "#f38ba8";
+        maroon = mkLiteral "#eba0ac";
+        peach = mkLiteral "#fab387";
+        yellow = mkLiteral "#f9e2af";
+        green = mkLiteral "#a6e3a1";
+        teal = mkLiteral "#94e2d5";
+        sky = mkLiteral "#89dceb";
+        sapphire = mkLiteral "#74c7ec";
+        blue = mkLiteral "#89b4fa";
+        lavender = mkLiteral "#b4befe";
+        text = mkLiteral "#cdd6f4";
+        subtext1 = mkLiteral "#bac2de";
+        subtext0 = mkLiteral "#a6adc8";
+        overlay2 = mkLiteral "#9399b2";
+        overlay1 = mkLiteral "#7f849c";
+        overlay0 = mkLiteral "#6c7086";
+        surface2 = mkLiteral "#585b70";
+        surface1 = mkLiteral "#45475a";
+        surface0 = mkLiteral "#313244";
+        base = mkLiteral "#1e1e2e";
+        mantle = mkLiteral "#181825";
+        crust = mkLiteral "#11111b";
 
-      font: "IosevkaTerm Nerd Font 12";
-    }
+        # --- Your config.rasi variables ---
+        "selected-active-foreground" = mkLiteral "@background";
+        lightfg = mkLiteral "@text";
+        separatorcolor = mkLiteral "@foreground";
+        "urgent-foreground" = mkLiteral "@red";
+        "alternate-urgent-background" = mkLiteral "@lightbg";
+        lightbg = mkLiteral "@mantle";
 
-    window {
-      transparency: "real";
-      background-color: #0f0f16cc;
-      border: 2px;
-      border-color: @border;
-      border-radius: 14px;
-      padding: 18px;
-    }
+        "background-color" = mkLiteral "transparent";
+        "border-color" = mkLiteral "@foreground";
+        "normal-background" = mkLiteral "@background";
+        "selected-urgent-background" = mkLiteral "@red";
+        "alternate-active-background" = mkLiteral "@lightbg";
+        spacing = 2;
+        "alternate-normal-foreground" = mkLiteral "@foreground";
+        "urgent-background" = mkLiteral "@background";
+        "selected-normal-foreground" = mkLiteral "@lightbg";
+        "active-foreground" = mkLiteral "@blue";
 
-    mainbox {
-      spacing: 12px;
-    }
+        background = mkLiteral "@base";
+        foreground = mkLiteral "@text";
 
-    inputbar {
-      background-color: @bg-alt;
-      border-radius: 12px;
-      padding: 10px 12px;
-    }
+        "selected-active-background" = mkLiteral "@blue";
+        "active-background" = mkLiteral "@background";
+        "selected-normal-background" = mkLiteral "@lightfg";
+        "alternate-normal-background" = mkLiteral "@lightbg";
+        "selected-urgent-foreground" = mkLiteral "@background";
+        "normal-foreground" = mkLiteral "@foreground";
+        "alternate-urgent-foreground" = mkLiteral "@red";
+        "alternate-active-foreground" = mkLiteral "@blue";
+      };
 
-    prompt {
-      text-color: @accent;
-      margin: 0px 8px 0px 0px;
-    }
+      element = {
+        padding = mkLiteral "1px";
+        cursor = mkLiteral "pointer";
+        spacing = mkLiteral "5px";
+        border = 0;
+      };
 
-    entry {
-      text-color: @fg;
-      placeholder: "Type to search";
-      placeholder-color: @fg-muted;
-    }
+      "element normal.normal" = {
+        "background-color" = mkLiteral "@normal-background";
+        "text-color" = mkLiteral "@normal-foreground";
+      };
+      "element normal.urgent" = {
+        "background-color" = mkLiteral "@urgent-background";
+        "text-color" = mkLiteral "@urgent-foreground";
+      };
+      "element normal.active" = {
+        "background-color" = mkLiteral "@active-background";
+        "text-color" = mkLiteral "@active-foreground";
+      };
 
-    listview {
-      background-color: transparent;
-      padding: 2px;
-      columns: 1;
-      lines: 8;
-      spacing: 8px;
-      scrollbar: false;
-      dynamic: true;
-    }
+      "element selected.normal" = {
+        "background-color" = mkLiteral "@selected-normal-background";
+        "text-color" = mkLiteral "@selected-normal-foreground";
+      };
+      "element selected.urgent" = {
+        "background-color" = mkLiteral "@selected-urgent-background";
+        "text-color" = mkLiteral "@selected-urgent-foreground";
+      };
+      "element selected.active" = {
+        "background-color" = mkLiteral "@selected-active-background";
+        "text-color" = mkLiteral "@selected-active-foreground";
+      };
 
-    element {
-      padding: 10px;
-      border-radius: 12px;
-      background-color: @bg-alt;
-      text-color: @fg;
-    }
+      "element alternate.normal" = {
+        "background-color" = mkLiteral "@alternate-normal-background";
+        "text-color" = mkLiteral "@alternate-normal-foreground";
+      };
+      "element alternate.urgent" = {
+        "background-color" = mkLiteral "@alternate-urgent-background";
+        "text-color" = mkLiteral "@alternate-urgent-foreground";
+      };
+      "element alternate.active" = {
+        "background-color" = mkLiteral "@alternate-active-background";
+        "text-color" = mkLiteral "@alternate-active-foreground";
+      };
 
-    element alternate {
-      background-color: @bg-alt-2;
-    }
+      "element-text" = {
+        "background-color" = mkLiteral "transparent";
+        cursor = mkLiteral "inherit";
+        highlight = mkLiteral "inherit";
+        "text-color" = mkLiteral "inherit";
+      };
 
-    element selected {
-      background-color: @accent;
-      text-color: #1b1024;
-    }
+      "element-icon" = {
+        "background-color" = mkLiteral "transparent";
+        size = mkLiteral "1.0000em";
+        cursor = mkLiteral "inherit";
+        "text-color" = mkLiteral "inherit";
+      };
 
-    element-icon {
-      size: 24px;
-      margin: 0px 10px 0px 0px;
-    }
+      window = {
+        padding = 5;
+        "background-color" = mkLiteral "@background";
+        border = 1;
+      };
 
-    mode-switcher {
-      spacing: 8px;
-    }
+      mainbox = {
+        padding = 0;
+        border = 0;
+      };
 
-    button {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background-color: @bg-alt;
-      text-color: @fg-muted;
-    }
+      message = {
+        padding = mkLiteral "1px";
+        "border-color" = mkLiteral "@separatorcolor";
+        border = mkLiteral "2px dash 0px 0px";
+      };
 
-    button selected {
-      background-color: @accent;
-      text-color: #1b1024;
-    }
+      textbox = {
+        "text-color" = mkLiteral "@foreground";
+      };
 
-    message {
-      margin: 4px 0px 0px 0px;
-      background-color: transparent;
-    }
+      listview = {
+        padding = mkLiteral "2px 0px 0px";
+        scrollbar = true;
+        "border-color" = mkLiteral "@separatorcolor";
+        spacing = mkLiteral "2px";
+        "fixed-height" = 0;
+        border = mkLiteral "2px dash 0px 0px";
+      };
 
-    textbox {
-      text-color: @fg-muted;
-    }
-  '';
+      scrollbar = {
+        width = mkLiteral "4px";
+        padding = 0;
+        "handle-width" = mkLiteral "8px";
+        border = 0;
+        "handle-color" = mkLiteral "@normal-foreground";
+      };
+
+      sidebar = {
+        "border-color" = mkLiteral "@separatorcolor";
+        border = mkLiteral "2px dash 0px 0px";
+      };
+
+      button = {
+        cursor = mkLiteral "pointer";
+        spacing = 0;
+        "text-color" = mkLiteral "@normal-foreground";
+      };
+
+      "button selected" = {
+        "background-color" = mkLiteral "@selected-normal-background";
+        "text-color" = mkLiteral "@selected-normal-foreground";
+      };
+
+      "num-filtered-rows" = {
+        expand = false;
+        "text-color" = mkLiteral "Gray";
+      };
+      "num-rows" = {
+        expand = false;
+        "text-color" = mkLiteral "Gray";
+      };
+
+      "textbox-num-sep" = {
+        expand = false;
+        str = "/";
+        "text-color" = mkLiteral "Gray";
+      };
+
+      inputbar = {
+        padding = mkLiteral "1px";
+        spacing = mkLiteral "0px";
+        "text-color" = mkLiteral "@normal-foreground";
+        children = map mkLiteral [
+          "prompt"
+          "textbox-prompt-colon"
+          "entry"
+          "num-filtered-rows"
+          "textbox-num-sep"
+          "num-rows"
+          "case-indicator"
+        ];
+      };
+
+      "case-indicator" = {
+        spacing = 0;
+        "text-color" = mkLiteral "@normal-foreground";
+      };
+
+      entry = {
+        "text-color" = mkLiteral "@normal-foreground";
+        cursor = mkLiteral "text";
+        spacing = 0;
+        "placeholder-color" = mkLiteral "Gray";
+        placeholder = "Type to filter";
+      };
+
+      prompt = {
+        spacing = 0;
+        "text-color" = mkLiteral "@normal-foreground";
+      };
+
+      "textbox-prompt-colon" = {
+        margin = mkLiteral "0px 0.3000em 0.0000em 0.0000em";
+        expand = false;
+        str = ":";
+        "text-color" = mkLiteral "inherit";
+      };
+    };
+
+    # Optional: real rofi configuration (goes into `configuration {}`),
+    # not theming. Example:
+    # extraConfig = {
+    #   show-icons = true;
+    #   modi = "drun,run,ssh";
+    # };
+  };
 }
