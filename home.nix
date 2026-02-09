@@ -114,6 +114,7 @@ in
     ppp
     openssl
     obs-studio
+    qutebrowser
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
