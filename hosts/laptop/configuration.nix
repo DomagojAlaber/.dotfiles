@@ -151,7 +151,6 @@
       "networkmanager"
       "wheel"
       "docker"
-      "libvirtd"
       "disk"
     ];
     shell = pkgs.zsh;
