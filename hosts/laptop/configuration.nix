@@ -116,11 +116,13 @@
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
+  # Enable sound with pipewire and disable other services
   services.pulseaudio.enable = false;
+  services.printing.enable = false;
+  services.nscd.enable = true;
+  services.nscd.enableNsncd = true;
+  services.spice-vdagentd.enable = false;
+
   security.rtkit.enable = true;
   security.unprivilegedUsernsClone = true;
   services.pipewire = {
@@ -181,18 +183,6 @@
 
   # Docker
   virtualisation.docker.enable = true;
-
-  # Virtualisaton attempt
-  programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "domagoj" ];
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      swtpm.enable = true;
-    };
-  };
-  virtualisation.spiceUSBRedirection.enable = true;
-  services.spice-vdagentd.enable = true;
 
   # Enable dconf (System Management Tool)
   programs.dconf.enable = true;
