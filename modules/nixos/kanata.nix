@@ -12,6 +12,7 @@ let
       caps
       a s d f   j k l ;
       f12
+      9 0
     )
 
     ;; --- OS-specific definition of the "WM modifier" emitted by A / ;
@@ -49,12 +50,17 @@ let
       k-mod (tap-hold $tap-time $hold-time k rsft)
       l-mod (tap-hold $tap-time $hold-time l ralt)
       ;-mod (tap-hold $tap-time $hold-time ; @wmR)
+
+      ;; tap-dance equivalents
+      td-9 (tap-hold $tap-time $hold-time 9 -)
+      td-0 (tap-hold $tap-time $hold-time 0 =)
     )
 
     (deflayer base
       esc
       @a-mod @s-mod @d-mod @f-mod   @j-mod @k-mod @l-mod @;-mod
       lrld
+      @td-9 @td-0
     )
   '';
 in
