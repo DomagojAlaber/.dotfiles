@@ -116,7 +116,7 @@ in
     obs-studio
     qutebrowser
     apidog
-    light
+    brightnessctl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

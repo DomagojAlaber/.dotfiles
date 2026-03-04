@@ -194,6 +194,7 @@
     rofi
     mixxx
     swtpm
+    brightnessctl
   ];
 
   services.libinput.mouse.accelProfile = "flat";
