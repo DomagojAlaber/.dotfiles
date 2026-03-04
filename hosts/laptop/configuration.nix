@@ -139,6 +139,7 @@
       "wheel"
       "docker"
       "disk"
+      "video"
     ];
     shell = pkgs.zsh;
   };
