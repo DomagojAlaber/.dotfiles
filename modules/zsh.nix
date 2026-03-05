@@ -42,6 +42,7 @@
       # misc
       cls = "clear";
       grep = "grep --color=auto";
+      ff = "fastfetch";
     };
 
     sessionVariables = {
