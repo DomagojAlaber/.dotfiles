@@ -48,7 +48,7 @@ in
   home.packages = with pkgs; [
     kitty
     wget
-    neofetch
+    fastfetch
     git
     go
     nodejs
@@ -116,7 +116,6 @@ in
     obs-studio
     qutebrowser
     apidog
-    brightnessctl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
