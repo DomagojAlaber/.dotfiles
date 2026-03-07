@@ -51,6 +51,29 @@ in
         title_format = "yazi  {cwd}";
       };
 
+      opener = {
+        media = [
+          {
+            run = "vlc %s";
+            orphan = true;
+            for = "unix";
+            desc = "Play media";
+          }
+        ];
+      };
+
+      open = {
+        prepend_rules = [
+          {
+            mime = "video/*";
+            use = "media";
+          }
+          {
+            mime = "audio/*";
+            use = "media";
+          }
+        ];
+      };
       edit = "nvim";
 
       preview = {
