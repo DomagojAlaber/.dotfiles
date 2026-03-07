@@ -116,6 +116,7 @@ in
     obs-studio
     qutebrowser
     apidog
+    vlc
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
