@@ -143,6 +143,7 @@
         "$mainMod, P, pseudo,"
         "$mainMod, S, exec, rofi -show drun -show-icons"
         "$mainMod, O, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+        "$mainMod, F, fullscreen"
         "$mainMod, PRINT, exec, hyprshot -m region --clipboard-only"
 
         "$mainMod, 1, workspace, 1"
