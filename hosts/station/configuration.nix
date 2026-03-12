@@ -10,7 +10,6 @@
     ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
     ../../modules/nixos/kanata.nix
-    ../../modules/nixos/netbird.nix
   ];
 
   # Bootloader.
