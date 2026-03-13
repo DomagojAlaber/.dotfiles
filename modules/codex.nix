@@ -9,14 +9,19 @@
       model = "gpt-5.4-codex";
       model_reasoning_effort = "xhigh";
 
-      mcp_servers.svelte = {
-        url = "https://mcp.svelte.dev/mcp";
-        enabled = true;
-      };
-
-      mcp_servers.better_auth = {
-        url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
-        enabled = true;
+      mcp_servers = {
+        svelte = {
+          url = "https://mcp.svelte.dev/mcp";
+          enabled = true;
+        };
+        better_auth = {
+          url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
+          enabled = true;
+        };
+        stripe = {
+          url = "https://mcp.stripe.com";
+          enabled = true;
+        };
       };
     };
 
