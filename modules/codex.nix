@@ -6,7 +6,7 @@
   programs.codex = {
     enable = true;
     settings = {
-      model = "gpt-5.2-codex";
+      model = "gpt-5.4-codex";
       model_reasoning_effort = "xhigh";
 
       mcp_servers.svelte = {
