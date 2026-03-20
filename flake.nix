@@ -28,6 +28,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.sharedModules = [ inputs.spicetify-nix.homeManagerModules.default ];
               home-manager.backupFileExtension = "backup";
               home-manager.overwriteBackup = true;
               home-manager.users.domagoj = import ./home.nix;
@@ -45,6 +47,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.sharedModules = [ inputs.spicetify-nix.homeManagerModules.default ];
               home-manager.backupFileExtension = "backup";
               home-manager.overwriteBackup = true;
               home-manager.users.domagoj = import ./home.nix;

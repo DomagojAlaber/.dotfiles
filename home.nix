@@ -97,7 +97,6 @@ in
     nixfmt
     vial
     php
-    spotify
     ripgrep
     jq
     curl
