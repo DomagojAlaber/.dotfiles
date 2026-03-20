@@ -117,6 +117,7 @@ in
     qutebrowser
     apidog
     vlc
+    spicetify-cli
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
