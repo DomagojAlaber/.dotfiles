@@ -38,13 +38,13 @@
       #####################
       general = {
         gaps_in = 1;
-        gaps_out = 10;
+        gaps_out = 5;
         border_size = 2;
 
         snap = {
           enabled = true;
-          window_gap = 8;
-          monitor_gap = 10;
+          window_gap = 4;
+          monitor_gap = 5;
           respect_gaps = false;
           border_overlap = false;
         };
