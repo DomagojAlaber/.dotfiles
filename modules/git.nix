@@ -12,5 +12,6 @@
         defaultBranch = "main";
       };
     };
+    signing.format = null;
   };
 }
