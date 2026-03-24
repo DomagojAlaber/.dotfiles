@@ -218,7 +218,7 @@
 
       sleep 2
 
-      swww img ~/.dotfiles/Wallpapers/nixos_catpuccin.jpg
+      swww img ~/.dotfiles/Wallpapers/gojo.jpg
 
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
