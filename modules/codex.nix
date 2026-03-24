@@ -1,29 +1,31 @@
-{
-  ...
-}:
+{ lib, pkgs, ... }:
 
+let
+  codexSettings = {
+    model = "gpt-5.4";
+    model_reasoning_effort = "xhigh";
+
+    mcp_servers = {
+      svelte = {
+        url = "https://mcp.svelte.dev/mcp";
+        enabled = true;
+      };
+      better_auth = {
+        url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
+        enabled = true;
+      };
+      stripe = {
+        url = "https://mcp.stripe.com";
+        enabled = true;
+      };
+    };
+  };
+
+  codexConfigTemplate = (pkgs.formats.toml { }).generate "codex-config" codexSettings;
+in
 {
   programs.codex = {
     enable = true;
-    settings = {
-      model = "gpt-5.4";
-      model_reasoning_effort = "xhigh";
-
-      mcp_servers = {
-        svelte = {
-          url = "https://mcp.svelte.dev/mcp";
-          enabled = true;
-        };
-        better_auth = {
-          url = "https://mcp.chonkie.ai/better-auth/better-auth-builder/mcp";
-          enabled = true;
-        };
-        stripe = {
-          url = "https://mcp.stripe.com";
-          enabled = true;
-        };
-      };
-    };
 
     custom-instructions = ''
       You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
@@ -51,4 +53,26 @@
       After completing the code, ask the user if they want a playground link. Only call this tool after user confirmation and NEVER if code was written to files in their project.
     '';
   };
+
+  # Codex persists slash-command changes like /permissions and /model back
+  # into config.toml. Seed a writable config instead of managing that file
+  # as an immutable store symlink.
+  home.activation.codexWritableConfig = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    codex_dir="$HOME/.codex"
+    codex_config="$codex_dir/config.toml"
+
+    mkdir -p "$codex_dir"
+
+    if [ ! -e "$codex_config" ]; then
+      install -m 600 ${codexConfigTemplate} "$codex_config"
+    elif [ -L "$codex_config" ]; then
+      target="$(readlink -f "$codex_config")"
+      case "$target" in
+        /nix/store/*-codex-config)
+          rm "$codex_config"
+          install -m 600 ${codexConfigTemplate} "$codex_config"
+          ;;
+      esac
+    fi
+  '';
 }
