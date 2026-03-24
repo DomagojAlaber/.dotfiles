@@ -5,18 +5,20 @@
     enable = true;
 
     style = ''
+      @import "mocha.css";
+
       * {
           font-family: "SpaceMono Nerd Font";
           font-size: 12px;
       }
 
       window#waybar {
-          background: transparent;
+          background: alpha(@base, 0.65);
           border-radius: 7rem;
-          color: #cba6f7;
+          color: @text;
           border-width: 2px;
           border-style: solid;
-          border-color: #cba6f7;
+          border-color: @mauve;
       }
 
       window#waybar.empty #window {
@@ -47,6 +49,7 @@
       	background-color: transparent;
           padding: 0 10px;
           border-radius: 7rem;
+          color: @text;
       }
 
       #clock:hover,
@@ -68,8 +71,8 @@
       #power-profiles-daemon:hover,
       #language:hover,
       #mpd:hover {
-          background-color: #cba6f7;
-          color: #561508;
+          background-color: @mauve;
+          color: @base;
       }
 
       #workspaces {
@@ -78,19 +81,19 @@
       }
 
       #workspaces button {
-        color: #cba6f7;
+        color: @lavender;
         border-radius: 7rem;
       }
 
       #workspaces button.active {
-        color: #561508;
-        background-color: #cba6f7;
+        color: @base;
+        background-color: @mauve;
         border-radius: 7rem;
       }
 
       #workspaces button:hover {
-        color: #561508;
-        background-color: #cba6f7;
+        color: @base;
+        background-color: @mauve;
         border-radius: 7rem;
       }
 
@@ -100,30 +103,33 @@
           font-size: 25px;
           background-color: transparent;
           border-radius: 7rem;
+          color: @blue;
       }
       #custom-arch:hover {
-          background-color: #cba6f7;
-          color: #561508;
+          background-color: @blue;
+          color: @base;
       }
       #custom-search {
           padding: 0 10px;
           font-size: 20px;
           background-color: transparent;
           border-radius: 7rem;
+          color: @sky;
       }
       #custom-search:hover {
-          background-color: #cba6f7;
-          color: #561508;
+          background-color: @sky;
+          color: @base;
       }
       #custom-power {
           margin-right: 5px;
           padding: 0 10px;
           background-color: transparent;
           border-radius: 7rem;
+          color: @red;
       }
       #custom-power:hover {
-          background-color: #cba6f7;
-          color: #561508;
+          background-color: @red;
+          color: @base;
       }
 
       #window {
@@ -132,8 +138,8 @@
         background-color: transparent;
       }
       #window:hover {
-          background-color: #cba6f7;
-          color: #561508;
+          background-color: @surface0;
+          color: @text;
       }
 
       #pulseaudio-slider slider {
@@ -149,11 +155,13 @@
       	min-width: 80px;
       	min-height: 5px;
       	border-radius: 7rem;
+          background-color: @surface0;
       }
 
       #pulseaudio-slider highlight {
       	min-height: 10px;
       	border-radius: 7rem;
+          background-color: @maroon;
       }
 
       #backlight-slider slider {
@@ -169,21 +177,74 @@
       	min-width: 80px;
       	min-height: 10px;
       	border-radius: 7rem;
+          background-color: @surface0;
       }
 
       #backlight-slider highlight {
       	min-width: 10px;
       	border-radius: 7rem;
+          background-color: @yellow;
       }
 
-      #mpris {
+      #custom-media {
       	border-radius: 7rem;
       	background-color: transparent;
       	padding: 0 10px;
+          color: @mauve;
       }
-      #mpris:hover {
-          background-color: #cba6f7;
-          color: #561508;
+      #custom-media:hover {
+          background-color: @mauve;
+          color: @base;
+      }
+
+      #clock {
+          color: @blue;
+      }
+
+      #network {
+          color: @green;
+      }
+
+      #pulseaudio {
+          color: @maroon;
+      }
+
+      #cpu {
+          color: @peach;
+      }
+
+      #memory {
+          color: @yellow;
+      }
+
+      #backlight {
+          color: @yellow;
+      }
+
+      #keyboard-state,
+      #hyprland-language,
+      #language {
+          color: @teal;
+      }
+
+      #tray {
+          color: @lavender;
+      }
+
+      #battery {
+          color: @green;
+      }
+
+      #battery.warning:not(.charging) {
+          color: @peach;
+      }
+
+      #battery.critical:not(.charging) {
+          color: @red;
+      }
+
+      #battery.charging {
+          color: @green;
       }
     '';
 
@@ -399,6 +460,8 @@
   ############################
   ##  WAYBAR SUPPORT FILES  ##
   ############################
+  home.file.".config/waybar/mocha.css".source = ../themes/waybar/mocha.css;
+
   home.file.".config/waybar/mediaplayer.py" = {
     text = ''
       #!/usr/bin/env python3
