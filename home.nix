@@ -117,6 +117,7 @@ in
     apidog
     vlc
     spicetify-cli
+    stripe-cli
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
