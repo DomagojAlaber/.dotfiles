@@ -59,8 +59,8 @@
 
     nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # GTX 1060 mobile is now on the 580.xx legacy branch; newer stable drivers ignore it.
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
   environment.sessionVariables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
