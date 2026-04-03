@@ -199,7 +199,7 @@
     cliphist
     dunst
     libnotify
-    swww
+    awww
     kitty
     rofi
     networkmanagerapplet
@@ -214,11 +214,11 @@
     text = ''
       #!/usr/bin/env bash
 
-      swww-daemon &
+      awww-daemon &
 
       sleep 2
 
-      swww img ~/.dotfiles/Wallpapers/gojo.jpg
+      awww img ~/.dotfiles/Wallpapers/gojo.jpg
 
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
