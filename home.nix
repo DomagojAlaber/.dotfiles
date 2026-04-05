@@ -90,7 +90,6 @@ in
     ngrok
     ffmpeg
     nixd
-    zed-editor
     killall
     svelte-language-server
     gitflow
