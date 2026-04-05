@@ -73,6 +73,7 @@ in
         "/dev/input/by-id/usb-MTKB_W-SOFLE_vial:f64c2b3c-event-kbd"
         "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
         "/dev/input/by-id/usb-Squalius-cephalus_silakka54_vial:f64c2b3c-event-kbd"
+        "/dev/input/by-id/usb-Compx_2.4G_Wireless_Receiver-if01-event-kbd"
       ];
       extraDefCfg = "process-unmapped-keys yes";
       config = kanataConfig;
