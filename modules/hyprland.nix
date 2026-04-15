@@ -38,7 +38,7 @@
       #####################
       general = {
         gaps_in = 1;
-        gaps_out = 5;
+        gaps_out = 0;
         border_size = 2;
 
         snap = {
