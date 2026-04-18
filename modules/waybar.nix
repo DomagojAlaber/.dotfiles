@@ -14,9 +14,9 @@
 
       window#waybar {
           background: alpha(@base, 0.65);
-          border-radius: 7rem;
+          border-radius: 0px;
           color: @text;
-          border-width: 2px;
+          border-width: 1px;
           border-style: solid;
           border-color: @mauve;
       }

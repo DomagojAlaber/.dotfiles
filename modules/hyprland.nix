@@ -39,7 +39,7 @@
       general = {
         gaps_in = 1;
         gaps_out = 0;
-        border_size = 2;
+        border_size = 1;
 
         snap = {
           enabled = true;
