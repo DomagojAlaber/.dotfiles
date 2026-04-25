@@ -270,7 +270,7 @@
           "network"
           "cpu"
           "memory"
-          "backlight"
+          "battery"
           "keyboard-state"
           "hyprland/language"
           "tray"
