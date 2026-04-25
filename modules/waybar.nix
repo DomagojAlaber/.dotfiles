@@ -572,12 +572,30 @@
   home.file.".config/waybar/power_menu.xml" = {
     text = ''
       <?xml version="1.0" encoding="UTF-8"?>
-      <menu id="power-menu">
-        <item label="Suspend" action="suspend"/>
-        <item label="Hibernate" action="hibernate"/>
-        <item label="Reboot" action="reboot"/>
-        <item label="Shutdown" action="shutdown"/>
-      </menu>
+      <interface>
+        <object class="GtkMenu" id="menu">
+          <child>
+            <object class="GtkMenuItem" id="suspend">
+              <property name="label">Suspend</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkMenuItem" id="hibernate">
+              <property name="label">Hibernate</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkMenuItem" id="reboot">
+              <property name="label">Reboot</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkMenuItem" id="shutdown">
+              <property name="label">Shutdown</property>
+            </object>
+          </child>
+        </object>
+      </interface>
     '';
   };
 }
