@@ -2,7 +2,7 @@
 
 let
   codexSettings = {
-    model = "gpt-5.4";
+    model = "gpt-5.5";
     model_reasoning_effort = "xhigh";
 
     mcp_servers = {
