@@ -218,7 +218,7 @@
 
       sleep 2
 
-      awww img ~/.dotfiles/Wallpapers/gojo.jpg
+      awww img ~/.dotfiles/Wallpapers/knight-templar.jpg
 
       wl-paste --type text  --watch cliphist store &
       wl-paste --type image --watch cliphist store &
