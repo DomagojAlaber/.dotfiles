@@ -117,6 +117,7 @@ in
     spicetify-cli
     stripe-cli
     apidog
+    anki
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
