@@ -390,6 +390,8 @@ in
 
       nm-applet --indicator &
 
+      blueman-applet &
+
       waybar &
 
       dunst

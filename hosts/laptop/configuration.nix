@@ -95,7 +95,13 @@
     };
   };
 
-  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman = {
+    enable = true;
+    # The upstream blueman package already ships a D-Bus-activated user unit.
+    # NixOS' generated applet override adds a second ExecStart and makes it invalid.
+    withApplet = false;
+  };
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us, hr";
