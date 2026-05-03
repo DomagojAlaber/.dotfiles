@@ -171,7 +171,7 @@ in
       ### MONITORS ###
       ################
       monitor = [
-        "eDP-1, highres@highr, 0x0, 1"
+        "DP-1, highres@highr, 0x0, 1"
         "DP-2, highres@highr, auto, 1"
         "DP-3, highres@highr, auto, 1"
       ];
