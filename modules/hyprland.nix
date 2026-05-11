@@ -295,7 +295,7 @@ in
         "$mainMod, return, exec, kitty"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
-        "$mainMod, E, exec, kitty -e yazi"
+        "$mainMod, E, exec, kitty -e sudo yazi"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
