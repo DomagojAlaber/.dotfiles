@@ -10,6 +10,7 @@
     ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
     ../../modules/nixos/kanata.nix
+    ../../modules/nixos/virtualization.nix
   ];
 
   # Bootloader.
@@ -107,7 +108,6 @@
       "wheel"
       "docker"
       "gamemode"
-      "vboxusers"
     ];
     shell = pkgs.zsh;
   };
@@ -147,11 +147,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  # If you want the networking modules too (vboxnetflt, vboxnetadp):
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.virtualbox.guest.enable = true;
-
   # Docker
   virtualisation.docker.enable = true;
 
@@ -168,15 +163,7 @@
     dbeaver-bin
     bun
     traceroute
-    virt-manager
-    virt-viewer
-    spice
-    spice-gtk
-    spice-protocol
-    virtio-win
-    win-spice
     adwaita-icon-theme
-    virtio-win
   ];
 
   services.libinput.mouse.accelProfile = "flat";
