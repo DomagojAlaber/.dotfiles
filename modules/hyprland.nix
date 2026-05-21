@@ -4,6 +4,9 @@
 }:
 
 let
+  cursorThemeName = "catppuccin-mocha-dark-cursors";
+  cursorSize = 24;
+
   wallpaperSwitcher = pkgs.writeShellApplication {
     name = "wallpaper-switcher";
     runtimeInputs = with pkgs; [
@@ -188,8 +191,9 @@ in
       ### ENVIRONMENT VARIABLES ###
       #############################
       env = [
-        "XCURSOR_SIZE,10"
-        "HYPRCURSOR_SIZE,10"
+        "XCURSOR_THEME,${cursorThemeName}"
+        "XCURSOR_SIZE,${toString cursorSize}"
+        "HYPRCURSOR_SIZE,${toString cursorSize}"
       ];
 
       #####################

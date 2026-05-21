@@ -5,6 +5,9 @@
 }:
 
 let
+  cursorThemeName = "catppuccin-mocha-dark-cursors";
+  cursorSize = 24;
+
   importAllNix =
     dir:
     let
@@ -39,8 +42,17 @@ in
       color-scheme = "prefer-dark";
       gtk-theme = "Adwaita-dark";
       icon-theme = "Adwaita";
-      cursor-theme = "Adwaita";
+      cursor-theme = cursorThemeName;
+      cursor-size = cursorSize;
     };
+  };
+
+  home.pointerCursor = {
+    package = pkgs.catppuccin-cursors.mochaDark;
+    name = cursorThemeName;
+    size = cursorSize;
+    gtk.enable = true;
+    x11.enable = true;
   };
 
   # The home.packages option allows you to install Nix packages into your
