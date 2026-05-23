@@ -7,6 +7,13 @@
 let
   cursorThemeName = "catppuccin-mocha-dark-cursors";
   cursorSize = 24;
+  gtkThemeName = "catppuccin-mocha-mauve-standard+normal";
+  gtkThemePackage = pkgs.catppuccin-gtk.override {
+    variant = "mocha";
+    accents = [ "mauve" ];
+    size = "standard";
+    tweaks = [ "normal" ];
+  };
 
   importAllNix =
     dir:
@@ -40,10 +47,37 @@ in
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      gtk-theme = "Adwaita-dark";
-      icon-theme = "Adwaita";
+      gtk-theme = gtkThemeName;
+      icon-theme = "Papirus-Dark";
       cursor-theme = cursorThemeName;
       cursor-size = cursorSize;
+    };
+  };
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = gtkThemePackage;
+      name = gtkThemeName;
+    };
+    iconTheme = {
+      package = pkgs.catppuccin-papirus-folders;
+      name = "Papirus-Dark";
+    };
+    cursorTheme = {
+      package = pkgs.catppuccin-cursors.mochaDark;
+      name = cursorThemeName;
+      size = cursorSize;
+    };
+
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4 = {
+      theme = {
+        package = gtkThemePackage;
+        name = gtkThemeName;
+      };
+      extraConfig.gtk-application-prefer-dark-theme = 1;
     };
   };
 
@@ -81,6 +115,7 @@ in
     postman
     uv
     dxvk
+    xdg-desktop-portal-gtk
     adwaita-qt
     libsForQt5.qt5ct
     protonup-qt
