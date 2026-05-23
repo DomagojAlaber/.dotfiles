@@ -126,9 +126,6 @@
     pkgs.xdg-desktop-portal-hyprland
   ];
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Install Steam
   programs.steam.enable = true;
 
