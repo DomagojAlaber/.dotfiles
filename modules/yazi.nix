@@ -2,13 +2,24 @@
 
 let
   # Pre-made Yazi flavors (themes)
-  yaziFlavors = pkgs.fetchFromGitHub {
+  yaziFlavorsSource = pkgs.fetchFromGitHub {
     owner = "yazi-rs";
     repo = "flavors";
     rev = "f6b425a6d57af39c10ddfd94790759f4d7612332";
     # If this hash ever fails, run nix-prefetch and update it.
     hash = "sha256-bavHcmeGZ49nNeM+0DSdKvxZDPVm3e6eaNmfmwfCid0=";
   };
+
+  yaziFlavors = pkgs.runCommand "yazi-flavors-patched" { } ''
+    cp -R ${yaziFlavorsSource} $out
+    chmod -R u+w $out
+
+    for flavor in "$out"/*.yazi/flavor.toml; do
+      substituteInPlace "$flavor" \
+        --replace-fail 'name = "*"' 'url = "*"' \
+        --replace-fail 'name = "*/"' 'url = "*/"'
+    done
+  '';
 in
 {
   programs.yazi = {
@@ -235,7 +246,7 @@ in
             fg = "#f7768e";
           }
           {
-            name = "*/";
+            url = "*/";
             fg = "#7dcfff";
           } # directories fallback
         ];
