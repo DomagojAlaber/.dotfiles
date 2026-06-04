@@ -158,6 +158,7 @@
     bun
     traceroute
     adwaita-icon-theme
+    mixxx
   ];
 
   services.libinput.mouse.accelProfile = "flat";
