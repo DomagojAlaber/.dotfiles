@@ -10,6 +10,23 @@
     ../../modules/nixos/kanata.nix
   ];
 
+  nix.settings.trusted-users = [
+    "root"
+    "domagoj"
+  ];
+
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://nixos-raspberrypi.cachix.org"
+  ];
+
+  nix.settings.trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0y5B9yq9/6y2+HBCg3m3y+7tcX+4rA="
+    "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+  ];
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # Bootloader.
   boot.loader.systemd-boot = {
     enable = true;
