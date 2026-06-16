@@ -211,7 +211,7 @@
     mixxx
     swtpm
     brightnessctl
-    vulkan-vulkan-tools
+    vulkan-tools
   ];
 
   services.libinput.mouse.accelProfile = "flat";
