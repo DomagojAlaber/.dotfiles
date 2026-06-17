@@ -165,7 +165,6 @@ in
     stripe-cli
     apidog
     anki
-    librewolf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
