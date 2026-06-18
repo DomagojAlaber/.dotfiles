@@ -81,15 +81,25 @@ in
     };
   };
 
+  services.ssh-agent.enable = true;
+
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
-    extraConfig = ''
-      AddKeysToAgent yes
-    '';
+    settings."*" = {
+      ForwardAgent = false;
+      AddKeysToAgent = "yes";
+      Compression = false;
+      ServerAliveInterval = 0;
+      ServerAliveCountMax = 3;
+      HashKnownHosts = false;
+      UserKnownHostsFile = "~/.ssh/known_hosts";
+      ControlMaster = "no";
+      ControlPath = "~/.ssh/master-%r@%n:%p";
+      ControlPersist = "no";
+    };
   };
-
-  services.ssh-agent.enable = true;
 
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors.mochaDark;
