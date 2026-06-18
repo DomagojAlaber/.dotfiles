@@ -179,7 +179,6 @@ in
     ppp
     openssl
     obs-studio
-    qutebrowser
     vlc
     spicetify-cli
     stripe-cli
