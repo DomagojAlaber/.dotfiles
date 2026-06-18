@@ -76,6 +76,7 @@ in
         "/dev/input/by-id/usb-Compx_2.4G_Wireless_Receiver-if01-event-kbd"
         "/dev/input/by-id/usb-Compx_2.4G_Wireless_Receiver-event-kbd"
         "/dev/input/by-id/usb-Logitech_USB_Receiver-event-kbd"
+        "/dev/input/by-id/kanata-lily58-bt-event-kbd"
       ];
       extraDefCfg = "process-unmapped-keys yes";
       config = kanataConfig;
