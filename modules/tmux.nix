@@ -26,6 +26,7 @@ in
       set -ga terminal-overrides ",*:RGB"
       set -g mouse on
       set -g set-clipboard on
+      set -g allow-passthrough on
 
       # Vim like pane selection
       bind h select-pane -L
