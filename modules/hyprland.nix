@@ -186,7 +186,7 @@ in
       ###################
       "$terminal" = "kitty";
       "$fileManager" = "yazi";
-      "$menu" = "wofi --show drun";
+      "$menu" = "rofi -show drun -show-icons";
 
       #############################
       ### ENVIRONMENT VARIABLES ###
@@ -300,9 +300,8 @@ in
         "$mainMod, return, exec, kitty"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
-        "$mainMod, E, exec, kitty -e sudo yazi"
+        "$mainMod, E, exec, yazi"
         "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, S, exec, rofi -show drun -show-icons"
         "$mainMod, O, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
