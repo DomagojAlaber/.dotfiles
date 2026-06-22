@@ -1,4 +1,6 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
@@ -6,6 +8,8 @@
 let
   cursorThemeName = "catppuccin-mocha-dark-cursors";
   cursorSize = 24;
+  hyprlandTarget = "hyprland-session.target";
+  cliphistMaxItems = "9223372036854775807";
 
   wallpaperSwitcher = pkgs.writeShellApplication {
     name = "wallpaper-switcher";
@@ -347,9 +351,6 @@ in
         "$mainMod SHIFT, j, movewindow, d"
       ];
 
-      exec-once = [
-        "bash ~/.config/hypr/start.sh"
-      ];
     };
   };
 
@@ -373,34 +374,92 @@ in
     wlsunset
   ]);
 
-  ##########################
-  ### MANAGE start.sh HM ###
-  ##########################
-  home.file.".config/hypr/start.sh" = {
-    text = ''
-      #!/usr/bin/env bash
+  xsession.preferStatusNotifierItems = true;
 
-      awww-daemon &
+  services.cliphist = {
+    enable = true;
+    allowImages = true;
+    systemdTargets = [ hyprlandTarget ];
+    extraOptions = [
+      "-max-items"
+      cliphistMaxItems
+    ];
+  };
 
-      sleep 2
+  services.wlsunset = {
+    enable = true;
+    sunrise = "07:00";
+    sunset = "21:00";
+    temperature = {
+      night = 3000;
+      day = 6500;
+    };
+    systemdTarget = hyprlandTarget;
+  };
 
-      wallpaper-switcher --restore
+  services.network-manager-applet.enable = true;
+  services.blueman-applet = {
+    enable = true;
+    systemdTargets = [ hyprlandTarget ];
+  };
+  services.dunst.enable = true;
 
-      wl-paste --type text  --watch cliphist store &
-      wl-paste --type image --watch cliphist store &
-      wl-paste --watch cliphist store -max-items 2000 &
+  systemd.user.services = {
+    dunst = {
+      Unit = {
+        After = lib.mkForce [ hyprlandTarget ];
+        PartOf = lib.mkForce [ hyprlandTarget ];
+      };
+      Install.WantedBy = [ hyprlandTarget ];
+    };
 
-      wlsunset -s 21:00 -S 07:00 -t 3000 -T 6500 &
+    network-manager-applet = {
+      Unit = {
+        After = lib.mkForce [
+          hyprlandTarget
+          "tray.target"
+        ];
+        PartOf = lib.mkForce [ hyprlandTarget ];
+      };
+      Install.WantedBy = lib.mkForce [ hyprlandTarget ];
+    };
 
-      nm-applet --indicator &
+    awww-daemon = {
+      Unit = {
+        Description = "Awww wallpaper daemon";
+        After = [ hyprlandTarget ];
+        PartOf = [ hyprlandTarget ];
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+      };
 
-      blueman-applet &
+      Service = {
+        ExecStart = "${pkgs.awww}/bin/awww-daemon";
+        Restart = "on-failure";
+      };
 
-      waybar &
+      Install.WantedBy = [ hyprlandTarget ];
+    };
 
-      dunst
-    '';
-    executable = true;
+    wallpaper-restore = {
+      Unit = {
+        Description = "Restore Hyprland wallpaper";
+        Wants = [ "awww-daemon.service" ];
+        After = [
+          hyprlandTarget
+          "awww-daemon.service"
+        ];
+        PartOf = [ hyprlandTarget ];
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+      };
+
+      Service = {
+        Type = "oneshot";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
+        ExecStart = "${wallpaperSwitcher}/bin/wallpaper-switcher --restore";
+      };
+
+      Install.WantedBy = [ hyprlandTarget ];
+    };
   };
 
 }
