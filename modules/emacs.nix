@@ -46,6 +46,9 @@
       (setq-default indent-tabs-mode nil
                     tab-width 2)
 
+      (setq display-line-numbers-type 'relative)
+      (global-display-line-number-mode +1)
+
       (setq catppuccin-flavor 'mocha)
       (load-theme 'catppuccin :no-confirm)
 
