@@ -6,93 +6,18 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/gc.nix
-    ../../modules/nixos/qol.nix
-    ../../modules/nixos/responsiveness.nix
-    ../../modules/nixos/vial-udev.nix
-    ../../modules/nixos/kanata.nix
+    ../../modules/nixos/common.nix
     ../../modules/nixos/virtualization.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 8;
-    editor = false;
-  };
-  boot.loader.timeout = 0;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "station"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  nix.settings.trusted-users = [
-    "root"
-    "domagoj"
-  ];
-
-  nix.settings.substituters = [
-    "https://cache.nixos.org"
-    "https://nixos-raspberrypi.cachix.org"
-  ];
-
-  nix.settings.trusted-public-keys = [
-    "cache.nixos.org-1:6NCHdD59X431o0y5B9yq9/6y2+HBCg3m3y+7tcX+4rA="
-    "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-  ];
-
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
-
   services.xserver.videoDrivers = [ "amdgpu" ];
-
-  # Set your time zone.
-  time.timeZone = "Europe/Zagreb";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "hr_HR.UTF-8";
-    LC_IDENTIFICATION = "hr_HR.UTF-8";
-    LC_MEASUREMENT = "hr_HR.UTF-8";
-    LC_MONETARY = "hr_HR.UTF-8";
-    LC_NAME = "hr_HR.UTF-8";
-    LC_NUMERIC = "hr_HR.UTF-8";
-    LC_PAPER = "hr_HR.UTF-8";
-    LC_TELEPHONE = "hr_HR.UTF-8";
-    LC_TIME = "hr_HR.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "Hyprland";
-        user = "domagoj";
-      };
-    };
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,hr";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -107,38 +32,11 @@
     nssmdns4 = true; # lets the system resolve *.local via Avahi/Multicast DNS
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
-  programs.zsh.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.domagoj = {
-    isNormalUser = true;
-    description = "DomagojAlaber";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "gamemode"
-    ];
-    shell = pkgs.zsh;
-  };
 
-  hardware.bluetooth.enable = true;
-  services.blueman = {
-    enable = true;
-  };
-  # Let the display manager own tty1.
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  users.users.domagoj.extraGroups = [ "gamemode" ];
 
-  xdg.portal.enable = true;
   xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
@@ -149,18 +47,6 @@
 
   # Gamemode
   programs.gamemode.enable = true;
-
-  # Enable dconf (System Management Tool)
-  programs.dconf.enable = true;
-
-  # Hyprland
-  programs.hyprland.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Docker
-  virtualisation.docker.enable = true;
 
   #List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -179,8 +65,6 @@
     mixxx
   ];
 
-  services.libinput.mouse.accelProfile = "flat";
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -190,9 +74,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -208,8 +89,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 }

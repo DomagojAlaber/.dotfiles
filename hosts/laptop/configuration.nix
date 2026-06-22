@@ -4,38 +4,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nixos/gc.nix
-    ../../modules/nixos/qol.nix
-    ../../modules/nixos/responsiveness.nix
-    ../../modules/nixos/vial-udev.nix
-    ../../modules/nixos/kanata.nix
+    ../../modules/nixos/common.nix
   ];
-
-  nix.settings.trusted-users = [
-    "root"
-    "domagoj"
-  ];
-
-  nix.settings.substituters = [
-    "https://cache.nixos.org"
-    "https://nixos-raspberrypi.cachix.org"
-  ];
-
-  nix.settings.trusted-public-keys = [
-    "cache.nixos.org-1:6NCHdD59X431o0y5B9yq9/6y2+HBCg3m3y+7tcX+4rA="
-    "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-  ];
-
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  # Bootloader.
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 8;
-    editor = false;
-  };
-  boot.loader.timeout = 0;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -44,8 +14,6 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
   networking.networkmanager.plugins = with pkgs; [
     networkmanager-fortisslvpn
     networkmanager-iodine
@@ -57,11 +25,7 @@
     networkmanager-vpnc
   ];
 
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  hardware.graphics.enable32Bit = true;
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -83,46 +47,6 @@
 
   environment.sessionVariables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
 
-  # Set your time zone.
-  time.timeZone = "Europe/Zagreb";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "hr_HR.UTF-8";
-    LC_IDENTIFICATION = "hr_HR.UTF-8";
-    LC_MEASUREMENT = "hr_HR.UTF-8";
-    LC_MONETARY = "hr_HR.UTF-8";
-    LC_NAME = "hr_HR.UTF-8";
-    LC_NUMERIC = "hr_HR.UTF-8";
-    LC_PAPER = "hr_HR.UTF-8";
-    LC_TELEPHONE = "hr_HR.UTF-8";
-    LC_TIME = "hr_HR.UTF-8";
-  };
-
-  services.xserver.enable = true;
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "Hyprland";
-        user = "domagoj";
-      };
-    };
-  };
-
-  hardware.bluetooth.enable = true;
-  services.blueman = {
-    enable = true;
-  };
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us, hr";
-    variant = "";
-  };
-
   # Enable sound with pipewire and disable other services
   services.pulseaudio.enable = false;
   services.printing.enable = false;
@@ -132,63 +56,20 @@
 
   security.rtkit.enable = true;
   security.unprivilegedUsernsClone = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-  programs.zsh.enable = true;
 
   programs.nix-ld.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.domagoj = {
-    isNormalUser = true;
-    description = "DomagojAlaber";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "disk"
-      "video"
-    ];
-    shell = pkgs.zsh;
-  };
 
-  # Let the display manager own tty1.
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  users.users.domagoj.extraGroups = [
+    "disk"
+    "video"
+  ];
 
-  #Hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  programs.hyprland.xwayland.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
-
-  xdg.portal.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Docker
-  virtualisation.docker.enable = true;
-
-  # Enable dconf (System Management Tool)
-  programs.dconf.enable = true;
 
   environment.pathsToLink = [ "/share/zsh" ];
 
@@ -214,7 +95,6 @@
     vulkan-tools
   ];
 
-  services.libinput.mouse.accelProfile = "flat";
   services.udisks2.enable = true;
   security.polkit.enable = true;
 
@@ -228,8 +108,6 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
   # Open ports in the firewall.
@@ -246,8 +124,4 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 }
