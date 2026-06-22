@@ -5,6 +5,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/gc.nix
+    ../../modules/nixos/qol.nix
     ../../modules/nixos/responsiveness.nix
     ../../modules/nixos/vial-udev.nix
     ../../modules/nixos/kanata.nix
