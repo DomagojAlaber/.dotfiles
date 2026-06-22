@@ -8,9 +8,21 @@
     extraPackages =
       epkgs: with epkgs; [
         catppuccin-theme
+        company
         evil
         evil-collection
+        flycheck
+        go-mode
+        json-mode
+        lsp-mode
+        lsp-ui
+        markdown-mode
+        nix-mode
+        svelte-mode
+        typescript-mode
+        web-mode
         which-key
+        yasnippet
       ];
 
     extraConfig = ''
@@ -52,6 +64,59 @@
 
       (require 'evil-collection)
       (evil-collection-init)
+
+      (require 'company)
+      (setq company-idle-delay 0.1
+            company-minimum-prefix-length 1
+            company-tooltip-align-annotations t)
+      (global-company-mode 1)
+
+      (require 'flycheck)
+      (global-flycheck-mode 1)
+
+      (require 'yasnippet)
+      (yas-global-mode 1)
+
+      (require 'lsp-mode)
+      (require 'lsp-ui)
+      (setq lsp-keymap-prefix "C-c l"
+            lsp-completion-provider :capf
+            lsp-enable-snippet t
+            lsp-headerline-breadcrumb-enable nil
+            lsp-idle-delay 0.35
+            lsp-log-io nil
+            lsp-prefer-flymake nil)
+      (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+      (add-hook 'lsp-mode-hook #'lsp-ui-mode)
+
+      (setq lsp-go-gopls-server-path "gopls"
+            lsp-nix-nixd-server-path "nixd"
+            lsp-clients-typescript-tls-path "typescript-language-server")
+
+      (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+      (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+      (add-to-list 'auto-mode-alist '("go\\.mod\\'" . go-dot-mod-mode))
+      (add-to-list 'auto-mode-alist '("go\\.work\\'" . go-dot-work-mode))
+      (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
+      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+      (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
+      (setq js-indent-level 2
+            typescript-indent-level 2
+            web-mode-code-indent-offset 2
+            web-mode-css-indent-offset 2
+            web-mode-markup-indent-offset 2)
+
+      (add-hook 'nix-mode-hook #'lsp-deferred)
+      (add-hook 'go-mode-hook #'lsp-deferred)
+      (add-hook 'go-mode-hook
+                (lambda ()
+                  (setq tab-width 4)
+                  (add-hook 'before-save-hook #'gofmt-before-save nil t)))
+      (add-hook 'svelte-mode-hook #'lsp-deferred)
+      (add-hook 'typescript-mode-hook #'lsp-deferred)
+      (add-hook 'js-mode-hook #'lsp-deferred)
+      (add-hook 'web-mode-hook #'lsp-deferred)
     '';
   };
 }

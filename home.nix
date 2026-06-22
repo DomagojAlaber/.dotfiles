@@ -117,6 +117,10 @@ in
     fastfetch
     git
     go
+    gopls
+    gotools
+    gomodifytags
+    delve
     nodejs
     neovim
     discord
@@ -159,6 +163,9 @@ in
     nixd
     killall
     svelte-language-server
+    typescript-language-server
+    prettier
+    eslint_d
     gitflow
     nixfmt
     vial
