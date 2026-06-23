@@ -36,6 +36,7 @@
       (menu-bar-mode -1)
       (tool-bar-mode -1)
       (scroll-bar-mode -1)
+      (setq display-line-numbers-type 'relative)
       (global-display-line-numbers-mode 1)
       (column-number-mode 1)
       (show-paren-mode 1)
@@ -45,9 +46,6 @@
 
       (setq-default indent-tabs-mode nil
                     tab-width 2)
-
-      (setq display-line-numbers-type 'relative)
-      (global-display-line-number-mode +1)
 
       (setq catppuccin-flavor 'mocha)
       (load-theme 'catppuccin :no-confirm)
