@@ -23,7 +23,7 @@
 
     protonup-qt
     winetricks
-    wineWowPackages.stable
+    wineWow64Packages.stable
 
     mangohud
     goverlay
