@@ -7,6 +7,7 @@
     ./responsiveness.nix
     ./vial-udev.nix
     ./kanata.nix
+    ./gaming.nix
   ];
 
   nix.settings = {
