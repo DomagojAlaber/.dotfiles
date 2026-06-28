@@ -193,6 +193,7 @@ in
     anki
     devenv
     beets
+    godef
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
