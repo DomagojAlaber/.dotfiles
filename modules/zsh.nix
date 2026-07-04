@@ -61,6 +61,8 @@
       autoload -Uz compinit
       zmodload zsh/complist
 
+      eval "$(devenv hook zsh)"
+
       _compdump="${config.xdg.cacheHome}/zsh/zcompdump"
       mkdir -p "$(dirname "$_compdump")"
       compinit -d "$_compdump"
