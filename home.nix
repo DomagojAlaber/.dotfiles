@@ -31,10 +31,6 @@ in
 
   home.stateVersion = "24.11"; # DO NOT CHANGE THIS VALUE.
 
-  programs.chromium = {
-    enable = true;
-  };
-
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
