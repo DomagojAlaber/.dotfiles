@@ -154,7 +154,6 @@ in
     nettools
     nicotine-plus
     brave
-    ngrok
     ffmpeg
     nixd
     killall
