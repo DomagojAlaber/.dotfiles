@@ -8,7 +8,17 @@ let
   cursorThemeName = "catppuccin-mocha-dark-cursors";
   cursorSize = 24;
   gtkThemeName = "catppuccin-mocha-mauve-standard+normal";
+  catppuccinGtkPython = pkgs.python313.override {
+    packageOverrides = _pyFinal: pyPrev: {
+      catppuccin = pyPrev.catppuccin.overridePythonAttrs (_old: {
+        # catppuccin 2.5.0's Matplotlib import check is broken with
+        # Matplotlib 3.11, but catppuccin-gtk does not need Matplotlib.
+        nativeCheckInputs = [ ];
+      });
+    };
+  };
   gtkThemePackage = pkgs.catppuccin-gtk.override {
+    python3 = catppuccinGtkPython;
     variant = "mocha";
     accents = [ "mauve" ];
     size = "standard";
