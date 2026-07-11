@@ -98,6 +98,7 @@ in
   };
 
   home.pointerCursor = {
+    enable = true;
     package = pkgs.catppuccin-cursors.mochaDark;
     name = cursorThemeName;
     size = cursorSize;
