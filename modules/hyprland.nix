@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -390,8 +389,9 @@ in
     enable = true;
     sunrise = "07:00";
     sunset = "21:00";
+    duration = 30;
     temperature = {
-      night = 3000;
+      night = 2500;
       day = 6500;
     };
     systemdTarget = hyprlandTarget;
