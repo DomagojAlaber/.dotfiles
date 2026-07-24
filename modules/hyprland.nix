@@ -391,7 +391,7 @@ in
     sunset = "21:00";
     duration = 30;
     temperature = {
-      night = 2500;
+      night = 2000;
       day = 6500;
     };
     systemdTarget = hyprlandTarget;
