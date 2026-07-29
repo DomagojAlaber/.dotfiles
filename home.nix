@@ -165,6 +165,7 @@ in
     nettools
     nicotine-plus
     brave
+    brave-origin
     ffmpeg
     nixd
     killall
