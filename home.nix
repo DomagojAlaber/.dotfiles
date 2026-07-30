@@ -202,6 +202,7 @@ in
     beets
     godef
     nh
+    z-library-desktop
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
