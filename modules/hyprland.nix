@@ -10,6 +10,24 @@ let
   hyprlandTarget = "hyprland-session.target";
   cliphistMaxItems = "9223372036854775807";
 
+  lua = lib.generators.mkLuaInline;
+  mkLuaBind = keys: dispatcher: {
+    _args = [
+      keys
+      (lua dispatcher)
+    ];
+  };
+  modKey = key: lua ''mainMod .. " + ${key}"'';
+  mkBezier = name: points: {
+    _args = [
+      name
+      {
+        type = "bezier";
+        inherit points;
+      }
+    ];
+  };
+
   wallpaperSwitcher = pkgs.writeShellApplication {
     name = "wallpaper-switcher";
     runtimeInputs = with pkgs; [
@@ -170,7 +188,7 @@ in
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    configType = "hyprlang";
+    configType = "lua";
     xwayland.enable = true;
 
     settings = {
@@ -178,178 +196,335 @@ in
       ### MONITORS ###
       ################
       monitor = [
-        "eDP-1, highres@highr, auto, 1"
-        "DP-1, highres@highr, 0x0, 1"
-        "DP-2, highres@highr, auto, 1"
-        "DP-3, highres@highr, auto, 1"
+        {
+          output = "eDP-1";
+          mode = "highres@highr";
+          position = "auto";
+          scale = 1;
+        }
+        {
+          output = "DP-1";
+          mode = "highres@highr";
+          position = "0x0";
+          scale = 1;
+        }
+        {
+          output = "DP-2";
+          mode = "highres@highr";
+          position = "auto";
+          scale = 1;
+        }
+        {
+          output = "DP-3";
+          mode = "highres@highr";
+          position = "auto";
+          scale = 1;
+        }
       ];
 
       ###################
       ### MY PROGRAMS ###
       ###################
-      "$terminal" = "kitty";
-      "$fileManager" = "yazi";
-      "$menu" = "rofi -show drun -show-icons";
+      terminal._var = "kitty";
+      fileManager._var = "yazi";
+      menu._var = "rofi -show drun -show-icons";
+      mainMod._var = "SUPER";
 
       #############################
       ### ENVIRONMENT VARIABLES ###
       #############################
       env = [
-        "XCURSOR_THEME,${cursorThemeName}"
-        "XCURSOR_SIZE,${toString cursorSize}"
-        "HYPRCURSOR_SIZE,${toString cursorSize}"
+        {
+          _args = [
+            "XCURSOR_THEME"
+            cursorThemeName
+          ];
+        }
+        {
+          _args = [
+            "XCURSOR_SIZE"
+            (toString cursorSize)
+          ];
+        }
+        {
+          _args = [
+            "HYPRCURSOR_SIZE"
+            (toString cursorSize)
+          ];
+        }
       ];
 
       #####################
       ### LOOK AND FEEL ###
       #####################
-      general = {
-        gaps_in = 1;
-        gaps_out = 0;
-        border_size = 1;
+      config = {
+        general = {
+          gaps_in = 1;
+          gaps_out = 0;
+          border_size = 1;
 
-        snap = {
+          snap = {
+            enabled = true;
+            window_gap = 4;
+            monitor_gap = 5;
+            respect_gaps = false;
+            border_overlap = false;
+          };
+
+          col = {
+            active_border = "rgba(9932ccff)";
+            inactive_border = "rgba(cba6f7cc)";
+          };
+
+          resize_on_border = false;
+          allow_tearing = false;
+          layout = "dwindle";
+        };
+
+        decoration = {
+          rounding = 2;
+          active_opacity = 0.95;
+          inactive_opacity = 0.90;
+        };
+
+        animations.enabled = true;
+
+        dwindle.preserve_split = true;
+
+        master.new_status = "master";
+
+        misc = {
+          force_default_wallpaper = -1;
+          disable_hyprland_logo = false;
+        };
+
+        input = {
+          kb_layout = "us,hr";
+          kb_variant = "";
+          kb_model = "";
+          kb_options = "grp:alt_shift_toggle";
+          kb_rules = "";
+
+          follow_mouse = 1;
+          sensitivity = 0;
+          accel_profile = "flat";
+
+          touchpad.natural_scroll = false;
+        };
+      };
+
+      curve = [
+        (mkBezier "easeOutQuint" [
+          [
+            0.23
+            1
+          ]
+          [
+            0.32
+            1
+          ]
+        ])
+        (mkBezier "easeInOutCubic" [
+          [
+            0.65
+            0.05
+          ]
+          [
+            0.36
+            1
+          ]
+        ])
+        (mkBezier "linear" [
+          [
+            0
+            0
+          ]
+          [
+            1
+            1
+          ]
+        ])
+        (mkBezier "almostLinear" [
+          [
+            0.5
+            0.5
+          ]
+          [
+            0.75
+            1
+          ]
+        ])
+        (mkBezier "quick" [
+          [
+            0.15
+            0
+          ]
+          [
+            0.1
+            1
+          ]
+        ])
+      ];
+
+      animation = [
+        {
+          leaf = "global";
           enabled = true;
-          window_gap = 4;
-          monitor_gap = 5;
-          respect_gaps = false;
-          border_overlap = false;
-        };
-
-        "col.active_border" = "rgba(9932ccff)";
-        "col.inactive_border" = "rgba(cba6f7cc)";
-
-        resize_on_border = false;
-        allow_tearing = false;
-        layout = "dwindle";
-      };
-
-      decoration = {
-        rounding = 2;
-        active_opacity = 0.95;
-        inactive_opacity = 0.90;
-      };
-
-      # Using the “fancy” animations block from the bottom of your config
-      animations = {
-        enabled = true;
-
-        bezier = [
-          "easeOutQuint,0.23,1,0.32,1"
-          "easeInOutCubic,0.65,0.05,0.36,1"
-          "linear,0,0,1,1"
-          "almostLinear,0.5,0.5,0.75,1.0"
-          "quick,0.15,0,0.1,1"
-        ];
-
-        animation = [
-          "global, 1, 6, default"
-          "border, 1, 3.5, easeOutQuint"
-          "windows, 1, 3, easeOutQuint"
-          "windowsIn, 1, 2.6, easeOutQuint, popin 87%"
-          "windowsOut, 1, 1, linear, popin 87%"
-          "fadeIn, 1, 1.2, almostLinear"
-          "fadeOut, 1, 1, almostLinear"
-          "fade, 1, 2, quick"
-          "layers, 1, 2.5, easeOutQuint"
-          "layersIn, 1, 2.6, easeOutQuint, fade"
-          "layersOut, 1, 1, linear, fade"
-          "fadeLayersIn, 1, 1.2, almostLinear"
-          "fadeLayersOut, 1, 1, almostLinear"
-          "workspaces, 1, 1.3, almostLinear, fade"
-          "workspacesIn, 1, 1, almostLinear, fade"
-          "workspacesOut, 1, 1.3, almostLinear, fade"
-        ];
-      };
-
-      dwindle = {
-        preserve_split = true;
-      };
-
-      master = {
-        new_status = "master";
-      };
-
-      misc = {
-        force_default_wallpaper = -1;
-        disable_hyprland_logo = false;
-      };
-
-      #############
-      ### INPUT ###
-      #############
-      input = {
-        kb_layout = "us,hr";
-        kb_variant = "";
-        kb_model = "";
-        kb_options = "grp:alt_shift_toggle";
-        kb_rules = "";
-
-        follow_mouse = 1;
-        sensitivity = 0;
-        accel_profile = "flat";
-
-        touchpad = {
-          natural_scroll = false;
-        };
-      };
+          speed = 6;
+          bezier = "default";
+        }
+        {
+          leaf = "border";
+          enabled = true;
+          speed = 3.5;
+          bezier = "easeOutQuint";
+        }
+        {
+          leaf = "windows";
+          enabled = true;
+          speed = 3;
+          bezier = "easeOutQuint";
+        }
+        {
+          leaf = "windowsIn";
+          enabled = true;
+          speed = 2.6;
+          bezier = "easeOutQuint";
+          style = "popin 87%";
+        }
+        {
+          leaf = "windowsOut";
+          enabled = true;
+          speed = 1;
+          bezier = "linear";
+          style = "popin 87%";
+        }
+        {
+          leaf = "fadeIn";
+          enabled = true;
+          speed = 1.2;
+          bezier = "almostLinear";
+        }
+        {
+          leaf = "fadeOut";
+          enabled = true;
+          speed = 1;
+          bezier = "almostLinear";
+        }
+        {
+          leaf = "fade";
+          enabled = true;
+          speed = 2;
+          bezier = "quick";
+        }
+        {
+          leaf = "layers";
+          enabled = true;
+          speed = 2.5;
+          bezier = "easeOutQuint";
+        }
+        {
+          leaf = "layersIn";
+          enabled = true;
+          speed = 2.6;
+          bezier = "easeOutQuint";
+          style = "fade";
+        }
+        {
+          leaf = "layersOut";
+          enabled = true;
+          speed = 1;
+          bezier = "linear";
+          style = "fade";
+        }
+        {
+          leaf = "fadeLayersIn";
+          enabled = true;
+          speed = 1.2;
+          bezier = "almostLinear";
+        }
+        {
+          leaf = "fadeLayersOut";
+          enabled = true;
+          speed = 1;
+          bezier = "almostLinear";
+        }
+        {
+          leaf = "workspaces";
+          enabled = true;
+          speed = 1.3;
+          bezier = "almostLinear";
+          style = "fade";
+        }
+        {
+          leaf = "workspacesIn";
+          enabled = true;
+          speed = 1;
+          bezier = "almostLinear";
+          style = "fade";
+        }
+        {
+          leaf = "workspacesOut";
+          enabled = true;
+          speed = 1.3;
+          bezier = "almostLinear";
+          style = "fade";
+        }
+      ];
 
       ###################
       ### KEYBINDINGS ###
       ###################
-      "$mainMod" = "SUPER";
-
       bind = [
-        "$mainMod, return, exec, kitty"
-        "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
-        "$mainMod, E, exec, yazi"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, P, pseudo,"
-        "$mainMod, S, exec, rofi -show drun -show-icons"
-        "$mainMod, O, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-        "$mainMod, W, exec, wallpaper-switcher"
-        "$mainMod, F, fullscreen"
-        "$mainMod, PRINT, exec, hyprshot -m region --clipboard-only"
+        (mkLuaBind (modKey "return") "hl.dsp.exec_cmd(terminal)")
+        (mkLuaBind (modKey "C") "hl.dsp.window.close()")
+        (mkLuaBind (modKey "M") "hl.dsp.exit()")
+        (mkLuaBind (modKey "E") "hl.dsp.exec_cmd(fileManager)")
+        (mkLuaBind (modKey "V") ''hl.dsp.window.float({ action = "toggle" })'')
+        (mkLuaBind (modKey "P") ''hl.dsp.window.pseudo({ action = "toggle" })'')
+        (mkLuaBind (modKey "S") "hl.dsp.exec_cmd(menu)")
+        (mkLuaBind (modKey "O") ''hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy")'')
+        (mkLuaBind (modKey "W") ''hl.dsp.exec_cmd("wallpaper-switcher")'')
+        (mkLuaBind (modKey "F") ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')
+        (mkLuaBind (modKey "PRINT") ''hl.dsp.exec_cmd("hyprshot -m region --clipboard-only")'')
 
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
+        (mkLuaBind (modKey "1") "hl.dsp.focus({ workspace = 1 })")
+        (mkLuaBind (modKey "2") "hl.dsp.focus({ workspace = 2 })")
+        (mkLuaBind (modKey "3") "hl.dsp.focus({ workspace = 3 })")
+        (mkLuaBind (modKey "4") "hl.dsp.focus({ workspace = 4 })")
+        (mkLuaBind (modKey "5") "hl.dsp.focus({ workspace = 5 })")
+        (mkLuaBind (modKey "6") "hl.dsp.focus({ workspace = 6 })")
+        (mkLuaBind (modKey "7") "hl.dsp.focus({ workspace = 7 })")
+        (mkLuaBind (modKey "8") "hl.dsp.focus({ workspace = 8 })")
+        (mkLuaBind (modKey "9") "hl.dsp.focus({ workspace = 9 })")
+        (mkLuaBind (modKey "0") "hl.dsp.focus({ workspace = 10 })")
 
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
+        (mkLuaBind (modKey "SHIFT + 1") "hl.dsp.window.move({ workspace = 1, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 2") "hl.dsp.window.move({ workspace = 2, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 3") "hl.dsp.window.move({ workspace = 3, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 4") "hl.dsp.window.move({ workspace = 4, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 5") "hl.dsp.window.move({ workspace = 5, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 6") "hl.dsp.window.move({ workspace = 6, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 7") "hl.dsp.window.move({ workspace = 7, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 8") "hl.dsp.window.move({ workspace = 8, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 9") "hl.dsp.window.move({ workspace = 9, follow = true })")
+        (mkLuaBind (modKey "SHIFT + 0") "hl.dsp.window.move({ workspace = 10, follow = true })")
 
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        (mkLuaBind (modKey "left") ''hl.dsp.focus({ direction = "l" })'')
+        (mkLuaBind (modKey "right") ''hl.dsp.focus({ direction = "r" })'')
+        (mkLuaBind (modKey "up") ''hl.dsp.focus({ direction = "u" })'')
+        (mkLuaBind (modKey "down") ''hl.dsp.focus({ direction = "d" })'')
 
-        "$mainMod, h, movefocus, l"
-        "$mainMod, l, movefocus, r"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, j, movefocus, d"
+        (mkLuaBind (modKey "h") ''hl.dsp.focus({ direction = "l" })'')
+        (mkLuaBind (modKey "l") ''hl.dsp.focus({ direction = "r" })'')
+        (mkLuaBind (modKey "k") ''hl.dsp.focus({ direction = "u" })'')
+        (mkLuaBind (modKey "j") ''hl.dsp.focus({ direction = "d" })'')
 
-        "$mainMod SHIFT, h, movewindow, l"
-        "$mainMod SHIFT, l, movewindow, r"
-        "$mainMod SHIFT, k, movewindow, u"
-        "$mainMod SHIFT, j, movewindow, d"
+        (mkLuaBind (modKey "SHIFT + h") ''hl.dsp.window.move({ direction = "l" })'')
+        (mkLuaBind (modKey "SHIFT + l") ''hl.dsp.window.move({ direction = "r" })'')
+        (mkLuaBind (modKey "SHIFT + k") ''hl.dsp.window.move({ direction = "u" })'')
+        (mkLuaBind (modKey "SHIFT + j") ''hl.dsp.window.move({ direction = "d" })'')
       ];
-
     };
   };
 
