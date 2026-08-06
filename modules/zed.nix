@@ -56,9 +56,9 @@
 
       icon_theme = "Catppuccin Mocha";
       vim_mode = true;
-      ui_font_size = 17;
+      ui_font_size = 15;
       buffer_font_family = "Iosevka Nerd Font";
-      buffer_font_size = 12;
+      buffer_font_size = 14;
 
       file_finder = {
         modal_max_width = "medium";
