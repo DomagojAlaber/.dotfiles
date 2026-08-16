@@ -136,6 +136,10 @@
         context = "Pane";
         bindings = {
           "ctrl-k h" = "pane::SplitLeft";
+          "ctrl-k alt-h" = [
+            "workspace::MoveItemToPaneInDirection"
+            { direction = "left"; }
+          ];
         };
       }
       {
@@ -154,6 +158,10 @@
         context = "Pane";
         bindings = {
           "ctrl-k l" = "pane::SplitRight";
+          "ctrl-k alt-l" = [
+            "workspace::MoveItemToPaneInDirection"
+            { direction = "right"; }
+          ];
         };
       }
     ];
