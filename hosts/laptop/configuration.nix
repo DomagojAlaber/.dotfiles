@@ -45,8 +45,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
 
-  environment.sessionVariables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
-
   # Enable sound with pipewire and disable other services
   services.pulseaudio.enable = false;
   services.printing.enable = false;
