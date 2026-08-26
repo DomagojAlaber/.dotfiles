@@ -74,7 +74,9 @@
     userKeymaps = [
       {
         context = "Workspace";
-        bindings = { };
+        bindings = {
+          "ctrl-alt-b" = "workspace::ToggleRightDock";
+        };
       }
       {
         context = "Editor && vim_mode == insert";
@@ -83,6 +85,7 @@
       {
         context = "ProjectPanel && not_editing";
         bindings = {
+          "ctrl-alt-b" = "workspace::ToggleRightDock";
           "ctrl-u" = [
             "action::Sequence"
             [
