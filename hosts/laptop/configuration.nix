@@ -55,7 +55,6 @@
   services.spice-vdagentd.enable = false;
 
   security.rtkit.enable = true;
-  security.unprivilegedUsernsClone = true;
 
   programs.nix-ld.enable = true;
 
