@@ -1,5 +1,36 @@
 { pkgs, ... }:
 
+let
+  waybarPomodoro = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "waybar-module-pomodoro";
+    version = "0.3.0-unstable-2026-08-28";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "Andeskjerf";
+      repo = pname;
+      rev = "3867b25ab691c4a697ee2ffca76d7cc9408675cc";
+      hash = "sha256-vB5WROn/GmaJyLNHnyfhTZItjQlJ+LMXMw8gOT1GM0s=";
+    };
+
+    cargoHash = "sha256-FTzqNkGn1dk+pdee8U07NI/uqUR6/gs51ZWOpYro3j8=";
+
+    preCheck = ''
+      export HOME=$TMPDIR
+    '';
+
+    dontUseCargoParallelTests = true;
+
+    meta = {
+      description = "Pomodoro timer module for Waybar";
+      homepage = "https://github.com/Andeskjerf/waybar-module-pomodoro";
+      license = pkgs.lib.licenses.unlicense;
+      mainProgram = pname;
+    };
+  };
+
+  pomodoroCommand = "${waybarPomodoro}/bin/waybar-module-pomodoro --persist --work 50 --shortbreak 10 --longbreak 30 --intervals 4";
+in
+
 {
   programs.waybar = {
     enable = true;
@@ -42,6 +73,7 @@
       #network,
       #pulseaudio,
       #wireplumber,
+      #custom-pomodoro,
       #custom-media,
       #tray,
       #bluetooth,
@@ -67,6 +99,7 @@
       #network:hover,
       #pulseaudio:hover,
       #wireplumber:hover,
+      #custom-pomodoro:hover,
       #custom-media:hover,
       #tray:hover,
       #mode:hover,
@@ -202,6 +235,37 @@
           color: @base;
       }
 
+      #custom-pomodoro {
+          color: @pink;
+      }
+
+      #custom-pomodoro.work {
+          color: @green;
+      }
+
+      #custom-pomodoro.break {
+          color: @sky;
+      }
+
+      #custom-pomodoro.pause {
+          color: @yellow;
+      }
+
+      #custom-pomodoro.work:hover {
+          background-color: @green;
+          color: @base;
+      }
+
+      #custom-pomodoro.break:hover {
+          background-color: @sky;
+          color: @base;
+      }
+
+      #custom-pomodoro.pause:hover {
+          background-color: @yellow;
+          color: @base;
+      }
+
       #clock {
           color: @blue;
       }
@@ -269,6 +333,7 @@
         ];
         "modules-center" = [
           "clock"
+          "custom/pomodoro"
         ];
         "modules-right" = [
           "pulseaudio"
@@ -428,6 +493,14 @@
           "exec" = "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null";
         };
 
+        "custom/pomodoro" = {
+          "format" = "{}";
+          "return-type" = "json";
+          "exec" = pomodoroCommand;
+          "on-click" = "${pomodoroCommand} toggle";
+          "on-click-right" = "${pomodoroCommand} reset";
+        };
+
         "custom/power" = {
           "format" = "⏻ ";
           "tooltip" = false;
@@ -460,6 +533,7 @@
     nerd-fonts.space-mono
     python3
     playerctl
+    waybarPomodoro
   ];
 
   ############################
