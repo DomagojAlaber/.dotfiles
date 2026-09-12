@@ -129,7 +129,6 @@ in
     gomodifytags
     delve
     nodejs
-    neovim
     discord
     dbeaver-bin
     bun
