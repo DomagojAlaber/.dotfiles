@@ -15,7 +15,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking.networkmanager.plugins = with pkgs; [
-    networkmanager-fortisslvpn
     networkmanager-iodine
     networkmanager-l2tp
     networkmanager-openconnect
