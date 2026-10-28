@@ -21,7 +21,6 @@
     networkmanager-openvpn
     networkmanager-sstp
     networkmanager-strongswan
-    networkmanager-vpnc
   ];
 
   hardware.graphics.enable32Bit = true;
