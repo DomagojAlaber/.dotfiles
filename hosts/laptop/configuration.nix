@@ -19,7 +19,6 @@
     networkmanager-l2tp
     networkmanager-openconnect
     networkmanager-openvpn
-    networkmanager-sstp
     networkmanager-strongswan
   ];
 
