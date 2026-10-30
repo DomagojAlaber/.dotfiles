@@ -201,6 +201,7 @@ in
     godef
     nh
     z-library-desktop
+    prismlauncher
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
