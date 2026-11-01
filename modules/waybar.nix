@@ -101,23 +101,33 @@ in
       @import "mocha.css";
 
       * {
-          font-family: "SpaceMono Nerd Font";
-          font-size: 12px;
+          font-family: "IosevkaTerm Nerd Font";
+          font-size: 14px;
+          min-height: 0;
       }
 
       window#waybar {
-          background: alpha(@base, 0.65);
-          border-radius: 0px;
+          background: alpha(@base, 0.92);
           color: @text;
-          border-width: 1px;
-          border-style: solid;
-          border-color: @mauve;
+          border: none;
+          border-bottom: 1px solid @surface0;
+          border-radius: 0;
       }
 
-      window#waybar.empty #window {
-          background-color: transparent;
-          padding: 0px;
-          border: 0px;
+      button {
+          min-width: 0;
+          padding: 0 10px;
+          border: none;
+          border-radius: 3px;
+          background: transparent;
+          box-shadow: none;
+          text-shadow: none;
+          color: @subtext0;
+      }
+
+      button:hover {
+          background: @surface0;
+          color: @text;
       }
 
       #clock,
@@ -132,246 +142,84 @@ in
       #wireplumber,
       #custom-pomodoro,
       #custom-media,
+      #custom-arch,
+      #custom-search,
+      #custom-power,
       #tray,
       #bluetooth,
       #mode,
       #idle_inhibitor,
       #scratchpad,
       #power-profiles-daemon,
+      #keyboard-state,
       #language,
+      #window,
       #mpd {
-      	background-color: transparent;
           padding: 0 10px;
-          border-radius: 7rem;
+          border-radius: 3px;
+          background: transparent;
           color: @text;
       }
 
       #clock:hover,
-      #battery:hover,
-      #cpu:hover,
-      #memory:hover,
-      #disk:hover,
-      #temperature:hover,
-      #backlight:hover,
-      #network:hover,
-      #pulseaudio:hover,
-      #wireplumber:hover,
       #custom-pomodoro:hover,
       #custom-media:hover,
-      #tray:hover,
-      #mode:hover,
-      #bluetooth:hover,
-      #idle_inhibitor:hover,
-      #scratchpad:hover,
-      #power-profiles-daemon:hover,
-      #language:hover,
-      #mpd:hover {
-          background-color: @mauve;
-          color: @base;
-      }
-
-      #workspaces {
-        border-radius: 7rem;
-        background-color: transparent;
-      }
-
-      #workspaces button {
-        color: @lavender;
-        border-radius: 7rem;
+      #custom-arch:hover,
+      #custom-search:hover,
+      #custom-power:hover,
+      #pulseaudio:hover,
+      #network:hover,
+      #battery:hover,
+      #tray:hover {
+          background: @surface0;
       }
 
       #workspaces button.active,
       #workspaces button.focused {
-        color: @base;
-        background-color: @mauve;
-        border-radius: 7rem;
-      }
-
-      #workspaces button:hover {
-        color: @base;
-        background-color: @mauve;
-        border-radius: 7rem;
-      }
-
-      #custom-arch {
-      	margin-left: 5px;
-          padding: 0 10px;
-          font-size: 25px;
-          background-color: transparent;
-          border-radius: 7rem;
-          color: @blue;
-      }
-      #custom-arch:hover {
-          background-color: @blue;
-          color: @base;
-      }
-      #custom-search {
-          padding: 0 10px;
-          font-size: 20px;
-          background-color: transparent;
-          border-radius: 7rem;
-          color: @sky;
-      }
-      #custom-search:hover {
-          background-color: @sky;
-          color: @base;
-      }
-      #custom-power {
-          margin-right: 5px;
-          padding: 0 10px;
-          background-color: transparent;
-          border-radius: 7rem;
-          color: @red;
-      }
-      #custom-power:hover {
-          background-color: @red;
-          color: @base;
-      }
-
-      #window {
-        border-radius: 7rem;
-        padding: 0 10px;
-        background-color: transparent;
-      }
-      #window:hover {
-          background-color: @surface0;
+          background: transparent;
           color: @text;
+          box-shadow: inset 0 -2px @text;
       }
 
-      #pulseaudio-slider slider {
-      	min-width: 0px;
-      	min-height: 0px;
-      	opacity: 0;
-      	background-image: none;
-      	border: none;
-      	box-shadow: none;
-      }
-
-      #pulseaudio-slider trough {
-      	min-width: 80px;
-      	min-height: 5px;
-      	border-radius: 7rem;
-          background-color: @surface0;
-      }
-
-      #pulseaudio-slider highlight {
-      	min-height: 10px;
-      	border-radius: 7rem;
-          background-color: @maroon;
-      }
-
-      #backlight-slider slider {
-      	min-width: 0px;
-      	min-height: 0px;
-      	opacity: 0;
-      	background-image: none;
-      	border: none;
-      	box-shadow: none;
-      }
-
-      #backlight-slider trough {
-      	min-width: 80px;
-      	min-height: 10px;
-      	border-radius: 7rem;
-          background-color: @surface0;
-      }
-
-      #backlight-slider highlight {
-      	min-width: 10px;
-      	border-radius: 7rem;
-          background-color: @yellow;
-      }
-
-      #custom-media {
-      	border-radius: 7rem;
-      	background-color: transparent;
-      	padding: 0 10px;
-          color: @mauve;
-      }
-      #custom-media:hover {
-          background-color: @mauve;
-          color: @base;
-      }
-
-      #custom-pomodoro {
-          color: @pink;
-      }
-
-      #custom-pomodoro.work {
-          color: @green;
-      }
-
-      #custom-pomodoro.break {
-          color: @sky;
-      }
-
-      #custom-pomodoro.pause {
-          color: @yellow;
-      }
-
-      #custom-pomodoro.work:hover {
-          background-color: @green;
-          color: @base;
-      }
-
-      #custom-pomodoro.break:hover {
-          background-color: @sky;
-          color: @base;
-      }
-
-      #custom-pomodoro.pause:hover {
-          background-color: @yellow;
-          color: @base;
-      }
-
-      #clock {
-          color: @blue;
-      }
-
-      #network {
-          color: @green;
-      }
-
-      #pulseaudio {
-          color: @maroon;
-      }
-
-      #cpu {
-          color: @peach;
-      }
-
-      #memory {
-          color: @yellow;
-      }
-
-      #backlight {
-          color: @yellow;
-      }
-
-      #keyboard-state,
-      #hyprland-language,
-      #language {
-          color: @teal;
-      }
-
-      #tray {
-          color: @lavender;
-      }
-
-      #battery {
-          color: @green;
+      #workspaces button.urgent {
+          color: @red;
       }
 
       #battery.warning:not(.charging) {
-          color: @peach;
+          color: @yellow;
       }
 
       #battery.critical:not(.charging) {
           color: @red;
       }
 
-      #battery.charging {
-          color: @green;
+      #custom-pomodoro.pause {
+          color: @subtext0;
+      }
+
+      #pulseaudio-slider slider,
+      #backlight-slider slider {
+          min-width: 0;
+          min-height: 0;
+          opacity: 0;
+          background-image: none;
+          border: none;
+          box-shadow: none;
+      }
+
+      #pulseaudio-slider trough,
+      #backlight-slider trough {
+          min-width: 60px;
+          min-height: 4px;
+          border-radius: 2px;
+          background: @surface0;
+      }
+
+      #pulseaudio-slider highlight,
+      #backlight-slider highlight {
+          min-height: 4px;
+          border-radius: 2px;
+          background: @subtext0;
       }
     '';
 
