@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   waybarPomodoro = pkgs.rustPlatform.buildRustPackage rec {
@@ -29,15 +34,56 @@ let
   };
 
   pomodoroCommand = "${waybarPomodoro}/bin/waybar-module-pomodoro --persist --work 50 --shortbreak 10 --longbreak 30 --intervals 4";
+  # Reuse the bar styling and desktop modules, selecting compositor-specific
+  # workspace, mode and keyboard modules when the session starts.
+  swayBarConfig = (pkgs.formats.json { }).generate "waybar-sway.json" (
+    map (
+      bar:
+      (builtins.removeAttrs bar [
+        "hyprland/workspaces"
+        "hyprland/submap"
+        "hyprland/language"
+      ])
+      // {
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+          "custom/media"
+        ];
+        modules-right = map (
+          name: if name == "hyprland/language" then "sway/language" else name
+        ) bar.modules-right;
+        "sway/workspaces" = {
+          disable-scroll = true;
+        };
+        "sway/mode" = {
+          format = "{}";
+        };
+        "sway/language" = {
+          format = "{short}";
+        };
+      }
+    ) config.programs.waybar.settings
+  );
+  startWaybar = pkgs.writeShellScript "start-waybar" ''
+    case ":''${XDG_CURRENT_DESKTOP:-}:" in
+      *:sway:*) exec ${pkgs.waybar}/bin/waybar --config ${swayBarConfig} ;;
+      *) exec ${pkgs.waybar}/bin/waybar ;;
+    esac
+  '';
+
 in
 
 {
+  xdg.configFile."waybar/sway.json".source = swayBarConfig;
+  systemd.user.services.waybar.Service.ExecStart = lib.mkForce "${startWaybar}";
+
   programs.waybar = {
     enable = true;
 
     systemd = {
       enable = true;
-      targets = [ "hyprland-session.target" ];
+      targets = [ "graphical-session.target" ];
     };
 
     style = ''
@@ -123,7 +169,8 @@ in
         border-radius: 7rem;
       }
 
-      #workspaces button.active {
+      #workspaces button.active,
+      #workspaces button.focused {
         color: @base;
         background-color: @mauve;
         border-radius: 7rem;
@@ -364,8 +411,6 @@ in
         "hyprland/workspaces" = {
           "show-special" = true;
         };
-
-        # If you ever use them, you can add sway/mode & sway/scratchpad here.
 
         "idle_inhibitor" = {
           "format" = "{icon}";

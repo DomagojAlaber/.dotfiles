@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -102,6 +107,13 @@
   programs = {
     zsh.enable = true;
     hyprland.enable = true;
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = [ ];
+      # The laptop uses the proprietary NVIDIA driver.
+      extraOptions = lib.optional (lib.elem "nvidia" config.services.xserver.videoDrivers) "--unsupported-gpu";
+    };
     dconf.enable = true;
   };
 
