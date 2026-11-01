@@ -102,7 +102,7 @@ in
         size = 10.0;
       };
       gaps = {
-        inner = 1;
+        inner = 0;
         outer = 0;
       };
       window = {

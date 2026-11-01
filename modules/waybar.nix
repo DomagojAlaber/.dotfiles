@@ -45,6 +45,10 @@ let
         "hyprland/language"
       ])
       // {
+        # Keep tiled windows below the bar and reserve its actual height.
+        layer = "top";
+        position = "top";
+        exclusive = true;
         modules-left = [
           "sway/workspaces"
           "sway/mode"
@@ -76,14 +80,21 @@ in
 
 {
   xdg.configFile."waybar/sway.json".source = swayBarConfig;
-  systemd.user.services.waybar.Service.ExecStart = lib.mkForce "${startWaybar}";
+  systemd.user.services.waybar = {
+    Service.ExecStart = lib.mkForce "${startWaybar}";
+    Unit.PartOf = lib.mkForce config.programs.waybar.systemd.targets;
+    Install.WantedBy = lib.mkForce config.programs.waybar.systemd.targets;
+  };
 
   programs.waybar = {
     enable = true;
 
     systemd = {
       enable = true;
-      targets = [ "graphical-session.target" ];
+      targets = [
+        "hyprland-session.target"
+        "sway-session.target"
+      ];
     };
 
     style = ''
