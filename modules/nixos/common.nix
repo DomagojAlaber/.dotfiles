@@ -38,6 +38,8 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  # Lutris's game runtime still needs GTK2 while Nixpkgs phases it out.
+  nixpkgs.config.problems.handlers."gtk+".broken = "warn";
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
