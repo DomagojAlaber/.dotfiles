@@ -166,6 +166,7 @@ in
     ffmpeg
     floorp-bin
     librewolf
+    vivaldi
     nixd
     killall
     svelte-language-server
