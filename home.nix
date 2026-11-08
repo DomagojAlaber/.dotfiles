@@ -165,6 +165,7 @@ in
     nicotine-plus
     ffmpeg
     floorp-bin
+    librewolf
     nixd
     killall
     svelte-language-server
