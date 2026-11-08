@@ -36,7 +36,7 @@
       gl = "git log --oneline --graph --decorate";
 
       # nix
-      update = "sudo nixos-rebuild switch --flake";
+      update = "nixos-rebuild switch --sudo --flake";
       nhist = "nix profile history"; # example extra
 
       # misc
