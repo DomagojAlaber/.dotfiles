@@ -163,7 +163,6 @@ in
     pavucontrol
     nettools
     nicotine-plus
-    brave-origin
     ffmpeg
     nixd
     killall
