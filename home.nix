@@ -164,6 +164,7 @@ in
     nettools
     nicotine-plus
     ffmpeg
+    floorp-bin
     nixd
     killall
     svelte-language-server
