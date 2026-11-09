@@ -26,6 +26,15 @@ in
 {
   programs.codex = {
     enable = true;
+    # Backport https://github.com/NixOS/nixpkgs/pull/584667 until nixpkgs includes it.
+    package = pkgs.codex.overrideAttrs (old: {
+      buildInputs = (old.buildInputs or [ ]) ++ [
+        pkgs.aws-lc
+        pkgs.oniguruma
+        pkgs.sqlite
+        pkgs.zstd
+      ];
+    });
 
     context = ''
       You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
