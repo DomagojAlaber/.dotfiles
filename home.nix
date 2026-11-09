@@ -157,7 +157,6 @@ in
     nerd-fonts.iosevka-term
     nerd-fonts.zed-mono
     wlsunset
-    davinci-resolve
     obsidian
     pamixer
     pavucontrol
@@ -197,7 +196,6 @@ in
     spicetify-cli
     stripe-cli
     apidog
-    anki
     devenv
     beets
     godef
