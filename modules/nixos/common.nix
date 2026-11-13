@@ -42,8 +42,6 @@
   nixpkgs.config.problems.handlers."gtk+".broken = "warn";
 
   boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-
     loader = {
       systemd-boot = {
         enable = true;
